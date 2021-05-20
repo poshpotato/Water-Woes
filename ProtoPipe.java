@@ -1,26 +1,27 @@
 
 /**
- * Write a description of class ProtoPipes here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * Ancestor class of all pipe types in the simulation.
+ * 
+ * Contains placeholders for:
+ * Flow rate
+ * Direction
+ * Flow rate getter
+ * 
+ * @Jebadiah Dudfield
+ * @20/05/2021
  */
-public class ProtoPipe
+public abstract class ProtoPipe
 {
-    // instance variables - replace the example below with your own
+    //Flowrate is for private use as getter methods will be customised per pipe
     private int flowRate;
-    public ProtoPipe[] directions;
+    //the directions a pipe is attached to is stored as a boolean array of length 4
+    //0: north 1: east 2: south 3: west
+    public boolean[] directions;
+
+    //Abstract, no constructors.
 
     /**
-     * Constructor for objects of class ProtoPipes
+     * Takes no parameters and returns an integer representing flowRate. Note: Implementations are expected to use the directions variable to check connected pipes' flow rate if neccessary.
      */
-    public ProtoPipe(){}
-
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y){return y;}
+    public abstract int getFlowRate();
 }
