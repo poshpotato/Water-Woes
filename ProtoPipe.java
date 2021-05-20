@@ -1,4 +1,3 @@
-
 /**
  * Ancestor class of all pipe types in the simulation.
  * 
