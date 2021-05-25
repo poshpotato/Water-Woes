@@ -4,6 +4,7 @@
  * 
  * Contains:
  * 2d Array representing the grid of pipes.
+ * Method for analysing pipes.
  *
  * @Jebadiah Dudfield
  * @21/05/2021
@@ -22,11 +23,14 @@ public class PipeNetwork
     }
 
     /**
-     * Example method
+     * This method is responsible for determining the flow rate of a network
      */
-    public int sampleMethod(int y)
+    public void determineFlowRates()
     {
-        // put your code here
-        return y;
+        //To put it roughly, this algorithm starts from the sources and works along the pipes until it reaches the sinks.
+        //It delays processing junctions until theres no normal pipes to process.
+        
+        //TODO: write code for this
+        
     }
 }
