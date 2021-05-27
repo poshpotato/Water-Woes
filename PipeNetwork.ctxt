@@ -1,10 +1,10 @@
 #BlueJ class context
 comment0.target=PipeNetwork
-comment0.text=\r\n\ PipeNetwork\ class\ represents\ the\ higher\ structure\ of\ the\ network\ of\ pipes.\r\n\ \r\n\ Contains\:\r\n\ 2d\ Array\ representing\ the\ grid\ of\ pipes.\r\n\ Method\ for\ analysing\ pipes.\r\n\r\n\ @Jebadiah\ Dudfield\r\n\ @21/05/2021\r\n
+comment0.text=\r\n\ PipeNetwork\ class\ represents\ the\ higher\ structure\ of\ the\ network\ of\ pipes.\r\n\ \r\n\ Contains\:\r\n\ 2d\ Array\ representing\ the\ grid\ of\ pipes.\r\n\ Control\ Methods\ for\ calculating\ flow\r\n\r\n\ @Jebadiah\ Dudfield\r\n\ @27/05/2021\r\n
 comment1.params=
 comment1.target=PipeNetwork()
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ PipeNetwork\r\n
 comment2.params=
 comment2.target=void\ determineFlowRates()
-comment2.text=\r\n\ This\ method\ is\ responsible\ for\ determining\ the\ flow\ rate\ of\ a\ network\r\n
+comment2.text=\r\n\ Control\ method\ for\ updating\ flow.\ Should\ be\ called\ whenever\ the\ grid\ is\ adjusted.\r\n
 numComments=3
