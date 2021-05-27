@@ -13,7 +13,7 @@ public class PipeNetwork
 {
     // pipeGrid stores ProtoPipes, which means all pipes that extend ProtoPipe can be stored and accessed in this array. Empty squares will be left null.
     public ProtoPipe[][] pipeGrid;
-
+    
     /**
      * Constructor for objects of class PipeNetwork
      */
