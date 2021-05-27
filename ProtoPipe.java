@@ -18,6 +18,7 @@ public abstract class ProtoPipe
     private boolean[] directions;
     
     //TODO: Add and implement calculation methods.
+    //TODO: Implement constructors to take and set directions for each pipetype
     
     //Abstract, no constructors.
 

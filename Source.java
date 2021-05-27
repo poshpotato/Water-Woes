@@ -1,23 +1,24 @@
 /**
- * Single Pipe with two ends that can be in any direction.
- * Extends ProtoPipe for use in calculations
+ * Source, start of flow.
+ * Extends ProtoPipe for use in calculations.
  *
  * Jebadiah Dudfield
  * 27/05/2021
  */
-public class Pipe extends ProtoPipe
+public class Source extends ProtoPipe
 {
-    //Flowrate is private; use getFlowRate() to get it.
+    //Flowrate is isn't dynamic, calculation method should do nothing.
     private int flowRate;
     //the directions a pipe is attached to is stored as a boolean array of length 4.
-    //In practice, this should only be connected in two directions, and should be 
+    //Sources can be connected to any number of pipes or junctions.
     //0: north 1: east 2: south 3: west
     private boolean[] directions;
     
+    
     /**
-     * Constructor for objects of class Pipe
+     * Constructor for objects of class Source
      */
-    public Pipe()
+    public Source()
     {
         
     }

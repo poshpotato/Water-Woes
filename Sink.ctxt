@@ -1,9 +1,9 @@
 #BlueJ class context
-comment0.target=Pipe
-comment0.text=\r\n\ Single\ Pipe\ with\ two\ ends\ that\ can\ be\ in\ any\ direction.\r\n\ Extends\ ProtoPipe\ for\ use\ in\ calculations\r\n\r\n\ Jebadiah\ Dudfield\r\n\ 27/05/2021\r\n
+comment0.target=Sink
+comment0.text=\r\n\ Sink,\ essentialy\ nullfies\ flowrate\r\n\ Extends\ ProtoPipe\ for\ use\ in\ calculations\r\n\r\n\ Jebadiah\ Dudfield\r\n\ 27/05/2021\r\n
 comment1.params=
-comment1.target=Pipe()
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Pipe\r\n
+comment1.target=Sink()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Sink\r\n
 comment2.params=
 comment2.target=int\ getFlowRate()
 comment2.text=\r\n\ Getter\ for\ the\ flowRate\ variable,\ for\ use\ in\ rendering\ and\ other\ pipes'\ calculations\r\n

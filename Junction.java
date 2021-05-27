@@ -1,29 +1,31 @@
 /**
- * Single Pipe with two ends that can be in any direction.
+ * Junction with multiple ends
+ * (yes, this is a pain to model. Yes, its the hardest part.)
  * Extends ProtoPipe for use in calculations
  *
  * Jebadiah Dudfield
  * 27/05/2021
  */
-public class Pipe extends ProtoPipe
+public class Junction extends ProtoPipe
 {
     //Flowrate is private; use getFlowRate() to get it.
     private int flowRate;
     //the directions a pipe is attached to is stored as a boolean array of length 4.
-    //In practice, this should only be connected in two directions, and should be 
+    //Junctions can be connected to 3 or four directions. 
     //0: north 1: east 2: south 3: west
     private boolean[] directions;
     
     /**
-     * Constructor for objects of class Pipe
+     * Constructor for objects of class Junction
      */
-    public Pipe()
+    public Junction()
     {
         
     }
 
     /**
-     * Getter for the flowRate variable, for use in rendering and other pipes' calculations
+     * Getter for the flowRate variable, for use in rendering and other pipes' calculations.
+     * TODO: add variable to track output flows, divide total flowrate by num of flows for the flow for a single output pipe.
      */
     public int getFlowRate()
     {
@@ -32,7 +34,7 @@ public class Pipe extends ProtoPipe
     }
     
     /**
-     * Takes no parameters and returns an boolean[] representing the direction the pipe is connected to. 
+     * Takes no parameters and returns an boolean[] representing the directions the pipe is connected to. 
      */
     public boolean[] getDirections(){
         return directions;

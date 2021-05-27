@@ -1,23 +1,24 @@
 /**
- * Single Pipe with two ends that can be in any direction.
+ * Sink, essentialy nullfies flowrate
  * Extends ProtoPipe for use in calculations
  *
  * Jebadiah Dudfield
  * 27/05/2021
  */
-public class Pipe extends ProtoPipe
+public class Sink extends ProtoPipe
 {
-    //Flowrate is private; use getFlowRate() to get it.
+    //Flowrate of 0 as flowrate represents outwards flow. and it connects to nothing
     private int flowRate;
     //the directions a pipe is attached to is stored as a boolean array of length 4.
-    //In practice, this should only be connected in two directions, and should be 
+    //Sinks can be connected to any number of pipes or junctions.
     //0: north 1: east 2: south 3: west
     private boolean[] directions;
     
+    
     /**
-     * Constructor for objects of class Pipe
+     * Constructor for objects of class Sink
      */
-    public Pipe()
+    public Sink()
     {
         
     }
@@ -27,8 +28,9 @@ public class Pipe extends ProtoPipe
      */
     public int getFlowRate()
     {
-        // put your code here
-        return flowRate;
+        // why would you need this. this shouldn't be called!
+        System.out.println("Someone wants to get water from a sink. This shouldn't be happening!");
+        return 0;
     }
     
     /**
