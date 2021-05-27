@@ -4,9 +4,10 @@
  * 
  * Contains:
  * 2d Array representing the grid of pipes.
+ * Control Methods for calculating flow
  *
  * @Jebadiah Dudfield
- * @21/05/2021
+ * @27/05/2021
  */
 public class PipeNetwork
 {
@@ -22,11 +23,9 @@ public class PipeNetwork
     }
 
     /**
-     * Example method
+     * Control method for updating flow. Should be called whenever the grid is adjusted.
      */
-    public int sampleMethod(int y)
+    public void sampleMethod()
     {
-        // put your code here
-        return y;
     }
 }
