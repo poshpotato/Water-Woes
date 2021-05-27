@@ -12,6 +12,7 @@
 public abstract class ProtoPipe
 {
     //Flowrate is for private use as getter methods will be customised per pipe
+    //flowRate is always positive, and a negative flowRate indicates an uncertain flow.
     private int flowRate;
     //the directions a pipe is attached to is stored as a boolean array of length 4
     //0: north 1: east 2: south 3: west

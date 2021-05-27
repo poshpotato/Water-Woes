@@ -4,6 +4,7 @@
  * 
  * Contains:
  * 2d Array representing the grid of pipes.
+ * Methods for adding pipes to grid
  * Control Methods for calculating flow
  *
  * @Jebadiah Dudfield
@@ -17,9 +18,9 @@ public class PipeNetwork
     /**
      * Constructor for objects of class PipeNetwork
      */
-    public PipeNetwork()
+    public PipeNetwork(int widthX, int heightY)
     {
-        
+        this.pipeGrid = new ProtoPipe[widthX][heightY];
     }
 
     /**
@@ -31,5 +32,14 @@ public class PipeNetwork
         //It delays processing junctions until theres no normal pipes to process.
         
         //TODO: write code for this
+    }
+    
+    /**
+     * Takes a String representing a type of pipe (canon type strings are "Pipe", "Junction", "Source", and "Sink"), and two integers representing the co-ordinates of the grid.
+     * It uses these to construct a new pipe of that type and add it to the grid.
+     */
+    public void addPipe(String type, int x, int y){
+        //TODO: write code for this. Use switch statement to clarify type
+        //TODO: add checks for being valid x and y co-ords. use pipeGrid's dimensions for this.
     }
 }
