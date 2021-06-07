@@ -57,7 +57,7 @@ public class PipeNetwork
     public void addPipe(String type, int x, int y){
         //TODO: write code for this. Use switch statement to clarify type
         
-        //This checks that the requested position is legitemate. Doesn't bother checking the type if it isn't.
+        //This checks that the requested position is legitemate.
         if(x<0 || x >= pipeGrid.length || y < 0 || y >= pipeGrid[0].length){
             ErrorReporter.reportError("Invalid position to place pipe of type \"" + type + "\": position " + x + "," + y +". Must be between 0,0 and " + (pipeGrid.length-1) + "," + (pipeGrid[0].length-1));
             return;

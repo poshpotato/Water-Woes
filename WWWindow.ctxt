@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=WWWindow
-comment0.text=\r\n\ The\ WWWindow\ class\ is\ a\ Jframe\ used\ for\ the\ main\ GUI\ of\ the\ simulation.\r\n\r\n\ Responsible\ for\:\r\n\ Displaying\ menus\r\n\ \ Saving/Loading\ simulation\ states\r\n\ \ Selecting\ tools\r\n\ \ Quitting\r\n\ Rendering\ simulation\r\n\ Handling\ input\r\n\ Controlling\ PipeNetwork\r\n\ \r\n\ Basically,\ if\ its\ anything\ to\ do\ with\ simulation\ logic\ or\ handling\ user\ interactions,\ its\ in\ here.\r\n\r\n\ @Jebadiah\ Dudfield\r\n\ @27/05/2021\r\n
-comment1.params=
-comment1.target=WWWindow()
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ WWWindow\r\n
-numComments=2
