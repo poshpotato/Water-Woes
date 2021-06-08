@@ -7,7 +7,7 @@
  * Control Methods for calculating flow
  *
  * @Jebadiah Dudfield
- * @3/06/2021
+ * @8/06/2021
  */
 public class PipeNetwork
 {
@@ -82,5 +82,15 @@ public class PipeNetwork
                 break;
         }
         
+    }
+    
+    public static PipeNetwork makeRandNetwork(int width, int height){
+        PipeNetwork rand = new PipeNetwork(width,height);
+        for(int i=0;i<rand.pipeGrid.length;i++){
+            for(int j=0; j<rand.pipeGrid[i].length; j++){
+                rand.addPipe("Sink",i,j);
+            }
+        }
+        return rand;
     }
 }
