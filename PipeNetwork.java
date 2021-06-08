@@ -82,13 +82,7 @@ public class PipeNetwork
         
     }
     
-    public static PipeNetwork makeRandNetwork(int width, int height){
-        PipeNetwork rand = new PipeNetwork(width,height);
-        for(int i=0;i<rand.pipeGrid.length;i++){
-            for(int j=0; j<rand.pipeGrid[i].length; j++){
-                rand.addPipe("Sink",i,j);
-            }
-        }
-        return rand;
+    public void removePipe(int x, int y){
+        
     }
 }
