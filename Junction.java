@@ -18,9 +18,11 @@ public class Junction extends ProtoPipe
     /**
      * Constructor for objects of class Junction
      */
-    public Junction()
+    public Junction(int x, int y)
     {
-        
+        //Pipes should be initialised with their locations for easier reference with algorithms later.
+        this.x = x;
+        this.y = y;
     }
 
     /**

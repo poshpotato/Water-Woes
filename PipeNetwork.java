@@ -55,8 +55,6 @@ public class PipeNetwork
      * It uses these to construct a new pipe of that type and add it to the grid.
      */
     public void addPipe(String type, int x, int y){
-        //TODO: write code for this. Use switch statement to clarify type
-        
         //This checks that the requested position is legitemate.
         if(x<0 || x >= pipeGrid.length || y < 0 || y >= pipeGrid[0].length){
             ErrorReporter.reportError("Invalid position to place pipe of type \"" + type + "\": position " + x + "," + y +". Must be between 0,0 and " + (pipeGrid.length-1) + "," + (pipeGrid[0].length-1));
@@ -66,19 +64,19 @@ public class PipeNetwork
         //Switch statement for string. Could be changed to Integer parameter to save memory later, but thats a low priority TODO
         switch(type){
             case "Pipe":
-                pipeGrid[x][y] = new Pipe();
+                pipeGrid[x][y] = new Pipe(x,y);
                 break;
             case "Junction":
-                pipeGrid[x][y] = new Junction();
+                pipeGrid[x][y] = new Junction(x,y);
                 break;
             case "Source":
-                pipeGrid[x][y] = new Source();
+                pipeGrid[x][y] = new Source(x,y);
                 break;
             case "Sink":
-                pipeGrid[x][y] = new Sink();
+                pipeGrid[x][y] = new Sink(x,y);
                 break;
             default:
-                ErrorReporter.reportError("Invalid Pipe Type \"" + type + "\", Canon pipe types are \"Pipe\", \"Junction\", \"Source\", and \"Sink\"" );
+                ErrorReporter.reportError("Invalid Pipe Type \"" + type + "\", Canon pipe types are \"Pipe\", \"Junction\", \"Source\", and \"Sink\"");
                 break;
         }
         

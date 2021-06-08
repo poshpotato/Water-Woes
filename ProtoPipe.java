@@ -18,6 +18,9 @@ public abstract class ProtoPipe
     //0: north 1: east 2: south 3: west
     private boolean[] directions;
     
+    public int x;
+    public int y;
+    
     //TODO: Add and implement calculation methods.
     //TODO: Implement constructors to take and set directions for each pipetype
     
