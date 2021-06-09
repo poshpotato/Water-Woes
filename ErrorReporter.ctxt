@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=ErrorReporter
+comment0.text=\r\n\ Handles\ error\ reporting\ to\ console\ or\ gui.\r\n\r\n\ @Jeb\ Dudfield\r\n\ @1/06/2021\r\n
+comment1.params=errormsg
+comment1.target=void\ reportError(java.lang.String)
+comment1.text=\r\n\ Error\ reporting\ method.\ This\ exists\ for\ easy\ changing\ of\ how\ errors\ are\ reported\ to\ the\ user.\r\n\ Currently,\ it\ just\ takes\ a\ string\ and\ prints\ it\ out\ in\ the\ terminal.\r\n
+numComments=2
