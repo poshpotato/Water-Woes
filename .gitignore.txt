@@ -1,4 +1,2 @@
 *.class
 *.ctxt
-.idea/*
-*.iml
