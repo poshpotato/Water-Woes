@@ -1,6 +1,7 @@
 /**
  * NullPipe is a placeholder pipe that stands in an empty cell.
- * Extends ProtoPipe for use in calculations
+ * Extends ProtoPipe for use in calculations.
+ * Cannot be added manually, as it only represents an empty cell and is created through removal.
  *
  * Jebadiah Dudfield
  * 27/05/2021
