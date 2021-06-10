@@ -1,3 +1,9 @@
+
+
+
+
+
+import java.util.ArrayList;
 /**
  * PipeNetwork class represents the higher structure of the network of pipes.
  * 
@@ -15,6 +21,8 @@ public class PipeNetwork
     //pipeGrid is a twodimensional array, where the first represents the column, or x, and the second represents the row, or y.
     //IMPORTANT: all secondary arrays must be the same length.
     public ProtoPipe[][] pipeGrid;
+    
+    private ArrayList<Source> sourceList = new ArrayList<Source>();
     
     /**
      * Constructor for objects of class PipeNetwork
@@ -36,7 +44,14 @@ public class PipeNetwork
             ErrorReporter.reportError("Height too large. Please limit sizes to 100 spaces or less to prevent crashes. Defaulting to 100.");
             heightY=100;
         }
+        //With checked dimensions, initialise the array and fill it with placeholder NullPipe objects.
         this.pipeGrid = new ProtoPipe[widthX][heightY];
+        //And fill it with placeholder NullPipe objects
+        for(int i=0;i<pipeGrid.length;i++){
+            for(int j=0; j<pipeGrid[i].length; j++){
+                pipeGrid[i][j] = new NullPipe();
+            }
+        }
     }
 
     /**
@@ -70,7 +85,10 @@ public class PipeNetwork
                 pipeGrid[x][y] = new Junction(x,y);
                 break;
             case "Source":
-                pipeGrid[x][y] = new Source(x,y);
+                //Sources are added to a seperate ArrayList for use in processing later.
+                Source newSource = new Source(x,y);
+                sourceList.add(newSource);
+                pipeGrid[x][y] = newSource;
                 break;
             case "Sink":
                 pipeGrid[x][y] = new Sink(x,y);
@@ -83,6 +101,9 @@ public class PipeNetwork
     }
     
     public void removePipe(int x, int y){
-        
+        if(pipeGrid[x][y].getClass().getName() == "Source"){
+            //if it is a source block, make sure to remove it from the sourceList ArrayList
+        }else{
+        }
     }
 }
