@@ -103,7 +103,10 @@ public class PipeNetwork
     public void removePipe(int x, int y){
         if(pipeGrid[x][y].getClass().getName() == "Source"){
             //if it is a source block, make sure to remove it from the sourceList ArrayList
+            sourceList.remove(pipeGrid[x][y]);
+            pipeGrid[x][y] = new NullPipe();
         }else{
+            pipeGrid[x][y] = new NullPipe();
         }
     }
 }

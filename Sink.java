@@ -14,7 +14,6 @@ public class Sink extends ProtoPipe
     //0: north 1: east 2: south 3: west
     private boolean[] directions;
     
-    
     /**
      * Constructor for objects of class Sink
      */
@@ -31,7 +30,7 @@ public class Sink extends ProtoPipe
     public int getFlowRate()
     {
         // why would you need this. this shouldn't be called!
-        System.out.println("Someone wants to get water from a sink. This shouldn't be happening!");
+        ErrorReporter.reportError("Someone wants to get water from a sink. This shouldn't be happening!");
         return 0;
     }
     

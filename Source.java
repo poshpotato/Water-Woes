@@ -35,6 +35,15 @@ public class Source extends ProtoPipe
     }
     
     /**
+     * Setter for the flowRate variable. Sources have the only manually assignable flowRate.
+     */
+    public int setFlowRate()
+    {
+        // put your code here
+        return flowRate;
+    }
+    
+    /**
      * Takes no parameters and returns an boolean[] representing the direction the pipe is connected to. 
      */
     public boolean[] getDirections(){
