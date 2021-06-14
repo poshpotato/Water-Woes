@@ -3,7 +3,7 @@
  * Quick and dirty debug/testing class for this program.
  *
  * @Jebadiah Dudfield
- * @8/06/2021
+ * @15/06/2021
  */
 public class DebugClass
 {
@@ -12,6 +12,7 @@ public class DebugClass
      */
     public DebugClass()
     {
+    
     }
 
     /**

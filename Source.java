@@ -40,7 +40,7 @@ public class Source extends ProtoPipe
     public int setFlowRate()
     {
         // put your code here
-        return flowRate;
+        return flowRate; 
     }
     
     /**
