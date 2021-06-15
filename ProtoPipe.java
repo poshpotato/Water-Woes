@@ -21,11 +21,22 @@ public abstract class ProtoPipe
     public int x;
     public int y;
     
+    //The representative for nullFlow is negative 1, as flow rates should only ever be positive.
+    public static int nullFlow = -1;
+    
     //TODO: Add and implement calculation methods.
     //TODO: Implement constructors to take and set directions for each pipetype
     
+    
+    
     //Abstract, no constructors.
 
+    /**
+     * Calculates flow rate based upon the directions its connected to.
+     */
+    public abstract void calcFlowRate();
+    
+    
     /**
      * Takes no parameters and returns an integer representing flowRate. Note: Implementations are expected to use the directions variable to check connected pipes' flow rate if neccessary.
      * A flow rate of -1 implies non-calculation.

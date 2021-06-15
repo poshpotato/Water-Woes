@@ -20,6 +20,13 @@ public class NullPipe extends ProtoPipe
     {
         
     }
+    
+    /**
+     * Doesn't need to calculate flow rate, get outta here. It doesnt exist.
+     */
+    public void calcFlowRate(){
+    
+    }
 
     /**
      * Getter for the flowRate variable, for use in rendering and other pipes' calculations

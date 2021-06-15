@@ -7,7 +7,7 @@
  */
 public class Pipe extends ProtoPipe
 {
-    //Flowrate is private; use getFlowRate() to get it.
+    //Flowrate is private; use getFlowRate() to get it. Initially set as whatever nullRep is defined as in ProtoPipe, and is reset to this at each recalculation.
     private int flowRate;
     //the directions a pipe is attached to is stored as a boolean array of length 4.
     //In practice, this should only be connected in two directions, and should be 
@@ -23,6 +23,23 @@ public class Pipe extends ProtoPipe
         this.x = x;
         this.y = y;
     }
+    
+    
+    /**
+     * Pipe's calculation is pretty simple. It checks the flow rate of the pipes its connected to, and gets the flowrate of the non-null one.
+     */
+    public void calcFlowRate(){
+        for(int i=0;i<directions.length;i++){
+            //checks all directions, and runs code depending on which direction it is.
+            if(directions[i]){
+                switch(i){
+                    case 0:
+                        //north
+                        
+                }
+            }
+        }
+    }
 
     /**
      * Getter for the flowRate variable, for use in rendering and other pipes' calculations
@@ -32,6 +49,8 @@ public class Pipe extends ProtoPipe
         // put your code here
         return flowRate;
     }
+    
+    
     
     /**
      * Takes no parameters and returns an boolean[] representing the direction the pipe is connected to. 

@@ -24,6 +24,13 @@ public class Source extends ProtoPipe
         this.x = x;
         this.y = y;
     }
+    
+    /**
+     * Theres pretty much no reason to calculate flow rate with a source! It has a constant, manually set rate.
+     */
+    public void calcFlowRate(){
+    
+    }
 
     /**
      * Getter for the flowRate variable, for use in rendering and other pipes' calculations
