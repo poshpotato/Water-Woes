@@ -27,15 +27,24 @@ public class Pipe extends ProtoPipe
     
     /**
      * Pipe's calculation is pretty simple. It checks the flow rate of the pipes its connected to, and gets the flowrate of the non-null one.
+     * TODO: Add direction-checking and actual calculation code here.
      */
     public void calcFlowRate(){
         for(int i=0;i<directions.length;i++){
-            //checks all directions, and runs code depending on which direction it is.
+            //checks all directions, and runs code checking each direction that directions[] says its connected to.
             if(directions[i]){
                 switch(i){
                     case 0:
                         //north
-                        
+                    case 1:
+                        //east
+                    case 2:
+                        //south
+                    case 3:
+                        //west
+                    default:
+                        ErrorReporter.reportError("Directional Pipe Flow not Implemented.");
+                        break;
                 }
             }
         }

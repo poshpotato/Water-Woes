@@ -24,6 +24,14 @@ public class Junction extends ProtoPipe
         this.x = x;
         this.y = y;
     }
+    
+    /**
+     * Junctions will average the flow rates of pipes already flowing into them, and then split them evenly between the outward flowing pipes.
+     * The order of processing algorithm means that junctions will only process after all other possible pipes are processed to prevent proccessing order errors.
+     */
+    public void calcFlowRate(){
+        ErrorReporter.reportError("Junction Flow Not Implemented Yet");
+    }
 
     /**
      * Getter for the flowRate variable, for use in rendering and other pipes' calculations.
