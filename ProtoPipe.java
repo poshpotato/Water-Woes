@@ -32,9 +32,9 @@ public abstract class ProtoPipe
     //Abstract, no constructors.
 
     /**
-     * Calculates flow rate based upon the directions its connected to.
+     * Calculates flow rate based upon the directions its connected to. Takes a parameter of the pipeNetwork it's in so it can get the pipes around it.
      */
-    public abstract void calcFlowRate();
+    public abstract void calcFlowRate(ProtoPipe[][] parentGrid);
     
     
     /**

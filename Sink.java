@@ -28,6 +28,8 @@ public class Sink extends ProtoPipe
      * A sink's flowrate is just the combined flowrate of the pipes around it.
      */
     public void calcFlowRate(){
+        
+        
         ErrorReporter.reportError("Sink calculations not implemented yet");
     }
 
