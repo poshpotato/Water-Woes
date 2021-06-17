@@ -8,7 +8,7 @@
 public class Sink extends ProtoPipe
 {
     //Flowrate of 0 as flowrate represents outwards flow. and it connects to nothing
-    private int flowRate;
+    private int flowRate = ProtoPipe.nullFlow;
     //the directions a pipe is attached to is stored as a boolean array of length 4.
     //Sinks can be connected to any number of pipes or junctions.
     //0: north 1: east 2: south 3: west

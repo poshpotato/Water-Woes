@@ -7,12 +7,16 @@
  */
 public class Pipe extends ProtoPipe
 {
-    //Flowrate is private; use getFlowRate() to get it. Initially set as whatever nullRep is defined as in ProtoPipe, and is reset to this at each recalculation.
-    private int flowRate;
+    //Flowrate is private; use getFlowRate() to get it. Initially set as whatever nullFlow is defined as in ProtoPipe, and is reset to this at each recalculation.
+    private int flowRate = ProtoPipe.nullFlow;
     //the directions a pipe is attached to is stored as a boolean array of length 4.
     //In practice, this should only be connected in two directions, and should be 
     //0: north 1: east 2: south 3: west
     private boolean[] directions;
+    
+    //bool for if vertical/horizontal
+    //for more meaningful rotations use an int.
+    boolean vertical = true;
     
     /**
      * Constructor for objects of class Pipe
@@ -24,11 +28,22 @@ public class Pipe extends ProtoPipe
         this.y = y;
     }
     
+    public Pipe(int x, int y, boolean vert){
+        //Pipes should be initialised with their locations and orientations for easier reference with algorithms later.
+        this.x = x;
+        this.y = y;
+        this.vertical = vert;
+    }
+    
     
     /**
      * Pipe's calculation is pretty simple. It checks the flow rate of the pipes its connected to, and gets the flowrate of the non-null one.
      * TODO: Add direction-checking and actual calculation code here.
      */
+    public void calcFlowRate(ProtoPipe[][] parentGrid){
+        ErrorReporter.reportError("Re-enable actual method when you're ready to deal with it.");
+    }
+    /*
     public void calcFlowRate(ProtoPipe[][] parentGrid){
         //This will track the flows added to the pipe; while there should only ever be coming.
         //Initialised with nullFlow so we can tell if its been set or not, we don't want to take from two different directions.
@@ -89,6 +104,7 @@ public class Pipe extends ProtoPipe
         //Once all of that is done, set the flowrate to the value stored.
         flowRate = tempFlowTracker;
     }
+    */
 
     /**
      * Getter for the flowRate variable, for use in rendering and other pipes' calculations

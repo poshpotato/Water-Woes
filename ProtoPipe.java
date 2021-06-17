@@ -16,7 +16,9 @@ public abstract class ProtoPipe
     private int flowRate;
     //the directions a pipe is attached to is stored as a boolean array of length 4
     //0: north 1: east 2: south 3: west
+    //TODO: Just replace this with a rotation variable.
     private boolean[] directions;
+    
     
     public int x;
     public int y;

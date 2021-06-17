@@ -9,7 +9,7 @@
 public class Junction extends ProtoPipe
 {
     //Flowrate is private; use getFlowRate() to get it.
-    private int flowRate;
+    private int flowRate = ProtoPipe.nullFlow;
     //the directions a pipe is attached to is stored as a boolean array of length 4.
     //Junctions can be connected to 3 or four directions. 
     //0: north 1: east 2: south 3: west

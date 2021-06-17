@@ -8,7 +8,7 @@
 public class Source extends ProtoPipe
 {
     //Flowrate is isn't dynamic, calculation method should do nothing.
-    private int flowRate;
+    private int flowRate = ProtoPipe.nullFlow;
     //the directions a pipe is attached to is stored as a boolean array of length 4.
     //Sources can be connected to any number of pipes or junctions.
     //0: north 1: east 2: south 3: west
@@ -44,10 +44,10 @@ public class Source extends ProtoPipe
     /**
      * Setter for the flowRate variable. Sources have the only manually assignable flowRate.
      */
-    public int setFlowRate()
+    public void setFlowRate(int flowSet)
     {
         // put your code here
-        return flowRate; 
+        this.flowRate = flowSet;
     }
     
     /**
