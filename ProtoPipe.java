@@ -11,20 +11,15 @@
  */
 public abstract class ProtoPipe
 {
-    //Flowrate is for private use as getter methods will be customised per pipe
-    //flowRate is always positive, and a negative flowRate indicates an uncertain flow.
-    private int flowRate;
-    //the directions a pipe is attached to is stored as a boolean array of length 4
-    //0: north 1: east 2: south 3: west
-    //TODO: Just replace this with a rotation variable.
-    private boolean[] directions;
-    
-    
+    //flow represents whether or not there is water currently flowing through the pipe.
+    private boolean flow;
+    //This int represents the rotation of the ProtoPipe, starting from a "default position" dependent on the ProtoPipe itself.
+    //As an example, the default position for a pipe will be 0, a vertical pipe. Every additional 1 on top of this rotates it 90 degrees.
+    //Each ProtoPipe will implement its own code reliant upon this rotation.
+    //For example, pipe uses rotation%2 to get its rotation as it only has two meaningful rotations.
+    private int rotation;
     public int x;
     public int y;
-    
-    //The representative for nullFlow is negative 1, as flow rates should only ever be positive.
-    public static int nullFlow = -1;
     
     //TODO: Add and implement calculation methods.
     //TODO: Implement constructors to take and set directions for each pipetype
@@ -47,12 +42,7 @@ public abstract class ProtoPipe
     
     
     /**
-     * Takes no parameters and returns an boolean[] representing the direction the pipe is connected to. 
+     * Integer direction represents the direction being checked; Starting at 0=north and proceeding clockwise. Each class will use its own method reliant its own shape or rotation.
      */
-    public abstract boolean[] getDirections();
-    
-    /**
-     * Used to set directions on placement.
-     */
-    public abstract void setDirections(boolean[] dirsToSet);
+    public abstract boolean isConnected(int direction);
 }
