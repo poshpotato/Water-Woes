@@ -23,22 +23,19 @@ public abstract class ProtoPipe
     
     //TODO: Add and implement calculation methods.
     //TODO: Implement constructors to take and set directions for each pipetype
-    
-    
-    
     //Abstract, no constructors.
 
     /**
-     * Calculates flow rate based upon the directions its connected to. Takes a parameter of the pipeNetwork it's in so it can get the pipes around it.
+     * Calculates flow based upon the directions its connected to. Takes a parameter of the pipeNetwork it's in so it can get the pipes around it. 
+     * Pipes should use rotation and isConnected to calculate whether or not its connected.
      */
     public abstract void calcFlowRate(ProtoPipe[][] parentGrid);
     
     
     /**
-     * Takes no parameters and returns an integer representing flowRate. Note: Implementations are expected to use the directions variable to check connected pipes' flow rate if neccessary.
-     * A flow rate of -1 implies non-calculation.
+     * Takes no parameters and returns an boolean representing flow.
      */
-    public abstract int getFlowRate();
+    public abstract boolean getFlow();
     
     
     /**

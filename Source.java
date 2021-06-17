@@ -7,12 +7,14 @@
  */
 public class Source extends ProtoPipe
 {
-    //Flowrate is isn't dynamic, calculation method should do nothing.
-    private int flowRate = ProtoPipe.nullFlow;
-    //the directions a pipe is attached to is stored as a boolean array of length 4.
-    //Sources can be connected to any number of pipes or junctions.
-    //0: north 1: east 2: south 3: west
-    private boolean[] directions;
+    //Flow represents whether or not there is water currently flowing through the pipe.
+    //sources *always* have flow! they're sources!
+    private final boolean flow = true;
+    //This int represents the rotation of the ProtoPipe, starting from a "default position" dependent on the ProtoPipe itself.
+    //Source has four meaningful rotations, starting with giving water to the upwards direction at 0 and proceeding clockwise.
+    private int rotation;
+    public int x;
+    public int y;
     
     
     /**
@@ -26,41 +28,26 @@ public class Source extends ProtoPipe
     }
     
     /**
-     * Theres pretty much no reason to calculate flow rate with a source! It has a constant, manually set rate.
+     * Theres pretty much no reason to calculate flow rate with a source! It has a constant rate of On.
      */
     public void calcFlowRate(ProtoPipe[][] parentGrid){
-    
+        
     }
 
     /**
      * Getter for the flowRate variable, for use in rendering and other pipes' calculations
      */
-    public int getFlowRate()
+    public boolean getFlow()
     {
         // put your code here
-        return flowRate;
+        return flow;
     }
     
     /**
-     * Setter for the flowRate variable. Sources have the only manually assignable flowRate.
+     * Integer direction represents the direction being checked; Starting at 0=north and proceeding clockwise. 
+     * Should just check direction against rotation and return that, as the rotation designates the side it is connected to in the same way as direction.
      */
-    public void setFlowRate(int flowSet)
-    {
-        // put your code here
-        this.flowRate = flowSet;
-    }
-    
-    /**
-     * Takes no parameters and returns an boolean[] representing the direction the pipe is connected to. 
-     */
-    public boolean[] getDirections(){
-        return directions;
-    }
-    
-    /**
-     * Used to set directions on placement.
-     */
-    public void setDirections(boolean[] dirsToSet){
-        this.directions=dirsToSet;
+    public boolean isConnected(int direction){
+        return (direction == rotation);
     }
 }
