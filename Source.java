@@ -20,11 +20,12 @@ public class Source extends ProtoPipe
     /**
      * Constructor for objects of class Source
      */
-    public Source(int x, int y)
+    public Source(int x, int y, int rotation)
     {
         //Pipes should be initialised with their locations for easier reference with algorithms later.
         this.x = x;
         this.y = y;
+        this.rotation = rotation;
     }
     
     /**
@@ -49,5 +50,9 @@ public class Source extends ProtoPipe
      */
     public boolean isConnected(int direction){
         return (direction == rotation);
+    }
+    
+    public void setRotation(int newRot){
+        this.rotation = newRot;
     }
 }

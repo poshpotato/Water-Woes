@@ -69,7 +69,7 @@ public class PipeNetwork
      * Takes a String representing a type of pipe (canon type strings are "Pipe", "Junction", "Source", and "Sink"), and two integers representing the co-ordinates of the grid.
      * It uses these to construct a new pipe of that type and add it to the grid.
      */
-    public void addPipe(String type, int x, int y){
+    public void addPipe(String type, int x, int y, int rotation){
         //This checks that the requested position is legitemate.
         if(x<0 || x >= pipeGrid.length || y < 0 || y >= pipeGrid[0].length){
             ErrorReporter.reportError("Invalid position to place pipe of type \"" + type + "\": position " + x + "," + y +". Must be between 0,0 and " + (pipeGrid.length-1) + "," + (pipeGrid[0].length-1));
@@ -77,21 +77,28 @@ public class PipeNetwork
         }
         
         //Switch statement for string. Could be changed to Integer parameter to save memory later, but thats a low priority TODO
+        
+        //Also, check if the position is already occupied. Formally remove the pipe that's already there if so.
+        if(pipeGrid[x][y].getClass().getName() != "NullPipe"){
+            this.removePipe(x,y);
+        }
+        
+        //The given rotation is adjusted to fit to the parameters of each type of pipe; most of them need something between 0 and 3, but pipes only have two meaningful rotations.
         switch(type){
             case "Pipe":
-                pipeGrid[x][y] = new Pipe(x,y);
+                pipeGrid[x][y] = new Pipe(x,y,rotation%2);
                 break;
             case "Junction":
-                pipeGrid[x][y] = new Junction(x,y);
+                pipeGrid[x][y] = new Junction(x,y,rotation%4);
                 break;
             case "Source":
                 //Sources are added to a seperate ArrayList for use in processing later.
-                Source newSource = new Source(x,y);
+                Source newSource = new Source(x,y,rotation%4);
                 sourceList.add(newSource);
                 pipeGrid[x][y] = newSource;
                 break;
             case "Sink":
-                pipeGrid[x][y] = new Sink(x,y);
+                pipeGrid[x][y] = new Sink(x,y,rotation%4);
                 break;
             default:
                 ErrorReporter.reportError("Invalid Pipe Type \"" + type + "\", Canon pipe types are \"Pipe\", \"Junction\", \"Source\", and \"Sink\"");

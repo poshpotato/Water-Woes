@@ -18,11 +18,12 @@ public class Pipe extends ProtoPipe
     /**
      * Constructor for objects of class Pipe
      */
-    public Pipe(int x, int y)
+    public Pipe(int x, int y, int rotation)
     {
         //Pipes should be initialised with their locations for easier reference with algorithms later.
         this.x = x;
         this.y = y;
+        this.rotation = rotation;
     }
     
     

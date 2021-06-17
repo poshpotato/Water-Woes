@@ -18,11 +18,12 @@ public class Sink extends ProtoPipe
     /**
      * Constructor for objects of class Sink
      */
-    public Sink(int x, int y)
+    public Sink(int x, int y, int rotation)
     {
         //Pipes should be initialised with their locations for easier reference with algorithms later.
         this.x = x;
         this.y = y;
+        this.rotation = rotation;
     }
     
     /**
