@@ -24,7 +24,7 @@ public class NullPipe extends ProtoPipe
     /**
      * Doesn't need to calculate flow rate, get outta here. It doesnt exist.
      */
-    public void calcFlowRate(){
+    public void calcFlowRate(ProtoPipe[][] parentGrid){
     
     }
 

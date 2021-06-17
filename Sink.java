@@ -27,9 +27,7 @@ public class Sink extends ProtoPipe
     /**
      * A sink's flowrate is just the combined flowrate of the pipes around it.
      */
-    public void calcFlowRate(){
-        
-        
+    public void calcFlowRate(ProtoPipe[][] parentGrid){
         ErrorReporter.reportError("Sink calculations not implemented yet");
     }
 

@@ -38,7 +38,8 @@ public class Pipe extends ProtoPipe
             //checks all directions, and runs code checking each direction that directions[] says its connected to.
             if(directions[i]){
                 //Okay so its kinda convoluted but we
-                //0.5. If the flowTracker is already set we return an error and exit the method by returning tempFlowTracker
+                
+                //0. If the flowTracker is already set we return an error and exit the method by returning tempFlowTracker
                 //There should only ever be one time that flowTracker is set for Pipe as it only has one input.
                 if(tempFlowTracker != -1){
                     ErrorReporter.reportError("Pipe at " + x + "," + y + " has 2 inflow pipes; This shouldn't occur.");
