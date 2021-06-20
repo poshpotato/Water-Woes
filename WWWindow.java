@@ -23,6 +23,9 @@ public class WWWindow extends JFrame implements ActionListener
     JMenuBar menuBar;
     JMenu file;
     JMenu pipes;
+    JPanel panel;
+    
+    Canvas graphic;
     
     /**
      * Constructor for objects of class WWWindow. TODO: Fill this with setup code.
@@ -41,6 +44,20 @@ public class WWWindow extends JFrame implements ActionListener
        setTitle("Water-Woes 15/06/2021");
        this.getContentPane().setPreferredSize(new Dimension(600,400)); 
        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+       
+       //Boom. Penl time
+       //panel = new JPanel();
+       //same size as window
+       //panel.setPreferredSize(new Dimension(400,400));
+       //this doesnt work, actually, it needs to go UNDER the window. A quick google says this should work, maybe?
+       //Following https://www.guru99.com/java-swing-gui.html#3
+       //panel = new JPanel(new GridBagLayout());
+       //GridBagConstraints c = new GridBagConstraints();
+       //This should make it fill the entire display area. THis is good for now, but I want to add a menu to select pipes to te side later.
+       //c.fill = GridBagConstraints.BOTH;
+    
+       Canvas graphic = new Canvas();
+       this.getContentPane().add(BorderLayout.CENTER, graphic);
     }
     
     /**
@@ -58,7 +75,7 @@ public class WWWindow extends JFrame implements ActionListener
      */
     public void setUpMenus(){
         menuBar = new JMenuBar();
-        this.setJMenuBar(menuBar);
+        this.getContentPane().add(BorderLayout.NORTH,menuBar);
         
         //File menu. Contains options to quit and create another network.
         
@@ -120,5 +137,10 @@ public class WWWindow extends JFrame implements ActionListener
                 ErrorReporter.reportError("Invalid Option \"" + cmd + "\".");
                 break;
         }
+    }
+    
+    public void paint(Graphics g){
+        super.paint(g);
+        g.drawRect(0,0,399,399);
     }
 }
