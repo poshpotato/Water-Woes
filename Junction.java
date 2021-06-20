@@ -8,26 +8,28 @@
  */
 public class Junction extends ProtoPipe
 {
-    //Flowrate is private; use getFlowRate() to get it.
-    private int flowRate = ProtoPipe.nullFlow;
-    //the directions a pipe is attached to is stored as a boolean array of length 4.
-    //Junctions can be connected to 3 or four directions. 
-    //0: north 1: east 2: south 3: west
-    private boolean[] directions;
+    //Flow represents whether or not there is water currently flowing through the pipe.
+    private boolean flow;
+    //This int represents the rotation of the ProtoPipe, starting from a "default position" dependent on the ProtoPipe itself.
+    //Junctions have four meaningful rotations, starting with having pipes in every direction but up at 0 and proceeding clockwise.
+    private int rotation;
+    public int x;
+    public int y;
     
     /**
      * Constructor for objects of class Junction
      */
-    public Junction(int x, int y)
+    public Junction(int x, int y, int rotation)
     {
         //Pipes should be initialised with their locations for easier reference with algorithms later.
         this.x = x;
         this.y = y;
+        this.rotation = rotation;
     }
     
     /**
-     * Junctions will average the flow rates of pipes already flowing into them, and then split them evenly between the outward flowing pipes.
-     * The order of processing algorithm means that junctions will only process after all other possible pipes are processed to prevent proccessing order errors.
+     * Calculates flow based upon the directions its connected to. Takes a parameter of the pipeNetwork it's in so it can get the pipes around it. 
+     * A junction will be on if any of the pipes connected to it have flow.
      */
     public void calcFlowRate(ProtoPipe[][] parentGrid){
         ErrorReporter.reportError("Junction Flow Not Implemented Yet");
@@ -37,23 +39,17 @@ public class Junction extends ProtoPipe
      * Getter for the flowRate variable, for use in rendering and other pipes' calculations.
      * TODO: add variable to track output flows, divide total flowrate by num of flows for the flow for a single output pipe.
      */
-    public int getFlowRate()
+    public boolean getFlow()
     {
         // put your code here
-        return flowRate;
+        return flow;
     }
     
     /**
-     * Takes no parameters and returns an boolean[] representing the directions the pipe is connected to. 
+     * Integer direction represents the direction being checked; Starting at 0=north and proceeding clockwise. 
+     * For a junction, the rotation variable will represent the direction that isn't connected. Thus, it is connected if direction != rotation!
      */
-    public boolean[] getDirections(){
-        return directions;
-    }
-    
-    /**
-     * Used to set directions on placement.
-     */
-    public void setDirections(boolean[] dirsToSet){
-        this.directions=dirsToSet;
+    public boolean isConnected(int direction){
+        return (direction != rotation);
     }
 }
