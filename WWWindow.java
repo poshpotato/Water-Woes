@@ -24,6 +24,8 @@ public class WWWindow extends JFrame implements ActionListener
     JMenu file;
     JMenu pipes;
     JPanel panel;
+    int xDimension = 600;
+    int yDimension = 400;
     
     Canvas graphic;
     
@@ -42,22 +44,18 @@ public class WWWindow extends JFrame implements ActionListener
      */
     public void setUpWindow(){
        setTitle("Water-Woes 15/06/2021");
-       this.getContentPane().setPreferredSize(new Dimension(600,400)); 
+       
+       
+       this.getContentPane().setPreferredSize(new Dimension(xDimension,yDimension)); 
        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
        
        //Boom. Penl time
-       //panel = new JPanel();
+       panel = new JPanel();
        //same size as window
-       //panel.setPreferredSize(new Dimension(400,400));
-       //this doesnt work, actually, it needs to go UNDER the window. A quick google says this should work, maybe?
-       //Following https://www.guru99.com/java-swing-gui.html#3
-       //panel = new JPanel(new GridBagLayout());
-       //GridBagConstraints c = new GridBagConstraints();
-       //This should make it fill the entire display area. THis is good for now, but I want to add a menu to select pipes to te side later.
-       //c.fill = GridBagConstraints.BOTH;
+       panel.setPreferredSize(new Dimension(xDimension,yDimension));
     
        Canvas graphic = new Canvas();
-       this.getContentPane().add(BorderLayout.CENTER, graphic);
+       panel.add(graphic);
     }
     
     /**
@@ -75,7 +73,7 @@ public class WWWindow extends JFrame implements ActionListener
      */
     public void setUpMenus(){
         menuBar = new JMenuBar();
-        this.getContentPane().add(BorderLayout.NORTH,menuBar);
+        this.setJMenuBar(menuBar);
         
         //File menu. Contains options to quit and create another network.
         
@@ -140,7 +138,25 @@ public class WWWindow extends JFrame implements ActionListener
     }
     
     public void paint(Graphics g){
+        //This infuriates me, frankly. I have to set all the sizes manually! MANUALLY! 
+        //Its real frustrating, and I have to set the window to unresizable so taht people don't resize and goof it up!
+        
         super.paint(g);
-        g.drawRect(0,0,399,399);
+        
+        //Boundary code. This should be a thin black line around the edge of the screen if the drawing area is 600 by 400.
+        //The offsets are based on the menu height and some weird factor that means an x of 0 is 8 pixels to the left of the window.
+        int xOffset = 8;
+        int yOffset = 53;
+        g.drawRect(xOffset,yOffset,599,400);
+        
+        //The vague scheme of the 600 by 400 window is that the first 400 or so square pixels are dedicated to the grid. The right 200 by 400 pixels go to the menu.
+    }
+    
+    
+    
+    public void drawGrid(Graphics g, int xOffset, int yOffset){
+        //Here is where the grid and pipes are drawn.
+        //In this 600 by 400 version of the simulation, the grid is 4 by 4. Each square consists of a 1px border and a 98x98 image of a pipe if there is one there. 
+        //This means the borders are 2px thick in total, from the neighbouring pipes.
     }
 }
