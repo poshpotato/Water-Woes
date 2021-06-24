@@ -235,7 +235,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
                 switch(currentNetwork.pipeGrid[xCell][yCell].getClass().getName()){
                     case "Pipe":
                     case "CornerPipe":
-                        //Pipe and CornerPipe use the same color for now. TOODO: Seperate these.
+                        //Pipe and CornerPipe use the same color for now. TODO: Seperate these.
                         g.setColor(Color.BLUE);
                         g.fillRect(xOffset+(xCell*50)+1,yOffset+(yCell*50)+1,49,49);
                         break;

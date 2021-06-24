@@ -22,7 +22,6 @@ public abstract class ProtoPipe
     public int y;
     
     //TODO: Add and implement calculation methods.
-    //TODO: Implement constructors to take and set directions for each pipetype
     //Abstract, no constructors.
 
     /**
