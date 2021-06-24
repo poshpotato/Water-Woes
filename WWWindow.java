@@ -29,6 +29,23 @@ public class WWWindow extends JFrame implements ActionListener
     
     Canvas graphic;
     
+    //TODO List
+    
+    //Must do:
+    //Make pipes render
+    //Make interactive menu
+    //Make grid adjustable
+    //Wire up calculations
+    
+    //Lower priority:
+    //Implement saving and loading
+    //Fix menu not repainting
+    
+    //If i have copious amounts of time left over:
+    //Make cursor change when a pipe is selected.
+    //Let the screen scale to 2 or 3 times size.
+    
+    
     /**
      * Constructor for objects of class WWWindow. TODO: Fill this with setup code.
      */
@@ -37,6 +54,10 @@ public class WWWindow extends JFrame implements ActionListener
         setUpWindow();
         setUpMenus();
         renderWindow();
+        
+        while(true){
+            
+        }
     }
     
     /**
@@ -53,6 +74,9 @@ public class WWWindow extends JFrame implements ActionListener
        panel = new JPanel();
        //same size as window
        panel.setPreferredSize(new Dimension(xDimension,yDimension));
+       
+       //I have had to do far too much hardcoding in my GUI code to let someone resize and fuck it all up!
+       this.setResizable(false);
     
        Canvas graphic = new Canvas();
        panel.add(graphic);
@@ -135,7 +159,17 @@ public class WWWindow extends JFrame implements ActionListener
                 ErrorReporter.reportError("Invalid Option \"" + cmd + "\".");
                 break;
         }
+        repaint();
     }
+    
+    public void actionPerformed(){
+        System.out.println("Something happened");
+    }
+    
+    /**
+     * GUI hell begins below
+     */
+    
     
     public void paint(Graphics g){
         //This infuriates me, frankly. I have to set all the sizes manually! MANUALLY! 
@@ -154,9 +188,13 @@ public class WWWindow extends JFrame implements ActionListener
     
     
     
+    /**
+     * Here is where the grid and pipes are drawn. They take up a 400 by 400 area on the left of the window.
+     */
     public void drawGrid(Graphics g, int xOffset, int yOffset){
-        //Here is where the grid and pipes are drawn.
-        //In this 600 by 400 version of the simulation, the grid is 4 by 4. Each square consists of a 1px border and a 98x98 image of a pipe if there is one there. 
+        //In this 600 by 400 version of the simulation, the grid is 8 by 8. Each 50x50 square consists of a 1px border and a 48x48 image of a pipe if there is a pipe in that spot there. 
         //This means the borders are 2px thick in total, from the neighbouring pipes.
+        
+        
     }
 }

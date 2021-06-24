@@ -25,7 +25,8 @@ public class PipeNetwork
     private ArrayList<Source> sourceList = new ArrayList<Source>();
     
     /**
-     * Constructor for objects of class PipeNetwork
+     * Constructor for objects of class PipeNetwork.
+     * Note, 
      */
     public PipeNetwork(int widthX, int heightY)
     {
