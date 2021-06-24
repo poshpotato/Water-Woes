@@ -95,6 +95,10 @@ public class PipeNetwork
             case "Junction":
                 pipeGrid[x][y] = new Junction(x,y,rotation%4);
                 break;
+            case "XJunction":
+                //Rotation is irrelevant here, but we mod 4 it anyway.
+                pipeGrid[x][y] = new XJunction(x,y,rotation%4);
+                break;
             case "Source":
                 //Sources are added to a seperate ArrayList for use in processing later.
                 Source newSource = new Source(x,y,rotation%4);

@@ -243,6 +243,10 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
                         g.setColor(Color.YELLOW);
                         g.fillRect(xOffset+(xCell*50)+1,yOffset+(yCell*50)+1,49,49);
                         break;
+                    case "XJunction":
+                        g.setColor(Color.ORANGE);
+                        g.fillRect(xOffset+(xCell*50)+1,yOffset+(yCell*50)+1,49,49);
+                        break;
                     case "Source":
                         g.setColor(Color.GREEN);
                         g.fillRect(xOffset+(xCell*50)+1,yOffset+(yCell*50)+1,49,49);
