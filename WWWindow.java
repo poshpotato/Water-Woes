@@ -184,9 +184,36 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
         int xOffset = 8;
         int yOffset = 53;
         g.drawRect(xOffset,yOffset,599,400);
+        drawGrid(g, xOffset, yOffset);
         
         //The vague scheme of the 600 by 400 window is that the first 400 or so square pixels are dedicated to the grid. The right 200 by 400 pixels go to the menu.
     }
+    
+    
+    
+    /**
+     * Here is where the grid and pipes are drawn. They take up a 400 by 400 area on the left of the window.
+     */
+    public void drawGrid(Graphics g, int xOffset, int yOffset){
+        //In this 600 by 400 version of the simulation, the grid is 8 by 8. Each 50x50 square consists of a 1px border and a 48x48 image of a pipe if there is a pipe in that spot there. 
+        //This means the borders are 2px thick in total, from the neighbouring pipes.
+        
+        //This bit draws the grid lines. TODO: Un-hardcode the lengths once i've implemented PipeNetwork in this class.
+        
+        for(int xCell=0; xCell<8; xCell++){
+            //for each column
+            for(int yCell = 0; yCell<8; yCell++){
+                //for each row:
+                //Draw an empty rectangle at the border of these bits.
+                //functionally, xOffset and yOffset are at 0,0. So we add it to every objective coordinate used to draw.
+                //Additionally, for each cell we check what cell it is and move 50px for each, as each is 50px wide/tall.
+                g.drawRect(xOffset+(xCell*50),yOffset+(yCell*50),50,50);
+                
+            }
+        }
+        
+    }
+    
     
     /**
      * Called whenever a menu opens.
@@ -209,16 +236,5 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
      */
     public void menuCanceled(MenuEvent e){
         menuDeselected(e);
-    }
-    
-    
-    /**
-     * Here is where the grid and pipes are drawn. They take up a 400 by 400 area on the left of the window.
-     */
-    public void drawGrid(Graphics g, int xOffset, int yOffset){
-        //In this 600 by 400 version of the simulation, the grid is 8 by 8. Each 50x50 square consists of a 1px border and a 48x48 image of a pipe if there is a pipe in that spot there. 
-        //This means the borders are 2px thick in total, from the neighbouring pipes.
-        
-        
     }
 }
