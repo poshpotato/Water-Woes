@@ -1,38 +1,36 @@
 /**
- * Single Pipe with two ends in opposite directions
+ * Single CornerPipe with two ends in an L shape.
  * Extends ProtoPipe for use in calculations
  *
  * Jebadiah Dudfield
  * 25/06/2021
  */
-public class Pipe extends ProtoPipe
+public class CornerPipe extends Pipe
 {
     //Flow represents whether or not there is water currently flowing through the pipe.
     private boolean flow;
     //This int represents the rotation of the ProtoPipe, starting from a "default position" dependent on the ProtoPipe itself.
-    //Pipe has two meaningful rotations, starting with being vertical and proceeding clockwise.
+    //CornerPipe has 4 meaningful rotations, starting at 0 with the most anticlockwise pipe being upwards, or an L shape.
     private int rotation;
     public int x;
     public int y;
     
     /**
-     * Constructor for objects of class Pipe
+     * Constructor for objects of class CornerPipe
      */
-    public Pipe(int x, int y, int rotation)
+    public CornerPipe(int x, int y, int rotation)
     {
-        //Pipes should be initialised with their locations for easier reference with algorithms later.
-        this.x = x;
-        this.y = y;
-        this.rotation = rotation;
+        //Same constructor jazz as the Pipe class, which this extends.
+        super(x,y,rotation);
     }
     
     
     /**
-     * Pipe's calculation is pretty simple. It checks the flow rate of the pipes its connected to, and gets the flowrate of the non-null one.
+     * CornerPipe's calculation is pretty simple. It checks the flow rate of the pipes its connected to, and gets the flowrate of the non-null one.
      * TODO: Add direction-checking and actual calculation code here.
      */
     public void calcFlowRate(ProtoPipe[][] parentGrid){
-        ErrorReporter.reportError("Pipe flow not implemented yet.");
+        ErrorReporter.reportError("CornerPipe flow not implemented yet.");
     }
 
     /**
@@ -46,10 +44,10 @@ public class Pipe extends ProtoPipe
     
     /**
      * Integer direction represents the direction being checked; Starting at 0=north and proceeding clockwise. 
-     * Uses modulo 2 of both sides to simplify into up/down; a rotation of 0 or 2 means the pipe is vertical, so if direction is a multiple of 2 then its vertical as well.
-     * This should hold for horizontal calculations the same way.
+     * If direction is the same as rotation or rotation + 1 modulo 4, it is connected.
+     * Rotation is equal to the direction of the anticlockwise connection, so rotation + 1 is the direction of the second connection
      */
     public boolean isConnected(int direction){
-        return (direction%2 == rotation%2);
+        return (direction%4 == rotation%4 || direction%4 == (rotation+1)%4);
     }
 }

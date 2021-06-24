@@ -67,7 +67,7 @@ public class PipeNetwork
     }
     
     /**
-     * Takes a String representing a type of pipe (canon type strings are "Pipe", "Junction", "Source", and "Sink"), and two integers representing the co-ordinates of the grid.
+     * Takes a String representing a type of pipe (canon type strings are "Pipe", "CornerPipe", "Junction", "Source", and "Sink"), and two integers representing the co-ordinates of the grid.
      * It uses these to construct a new pipe of that type and add it to the grid.
      */
     public void addPipe(String type, int x, int y, int rotation){
@@ -84,10 +84,13 @@ public class PipeNetwork
             this.removePipe(x,y);
         }
         
-        //The given rotation is adjusted to fit to the parameters of each type of pipe; most of them need something between 0 and 3, but pipes only have two meaningful rotations.
+        //The given rotation is adjusted with modulo to fit to the parameters of each type of pipe; most of them need something between 0 and 3, but pipes only have two meaningful rotations.
         switch(type){
             case "Pipe":
                 pipeGrid[x][y] = new Pipe(x,y,rotation%2);
+                break;
+            case "CornerPipe":
+                pipeGrid[x][y] = new CornerPipe(x,y,rotation%4);
                 break;
             case "Junction":
                 pipeGrid[x][y] = new Junction(x,y,rotation%4);
