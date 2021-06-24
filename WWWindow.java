@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
 /**
@@ -18,7 +19,7 @@ import java.awt.event.*;
  * @Jebadiah Dudfield
  * @15/06/2021
  */
-public class WWWindow extends JFrame implements ActionListener
+public class WWWindow extends JFrame implements ActionListener, MenuListener
 {
     JMenuBar menuBar;
     JMenu file;
@@ -102,6 +103,8 @@ public class WWWindow extends JFrame implements ActionListener
         //File menu. Contains options to quit and create another network.
         
         file = new JMenu("File");
+        //Note: this class implements MenuListener so it can handle repainting when menus are opened and closed.
+        file.addMenuListener(this);
         menuBar.add(file);
         
         //Note: Savings hard!
@@ -117,6 +120,7 @@ public class WWWindow extends JFrame implements ActionListener
         
         //Pipes menu. Changes selected Pipe.
         pipes = new JMenu("Pipes");
+        pipes.addMenuListener(this);
         menuBar.add(pipes);
         JMenuItem pipe = new JMenuItem("Pipe");
         pipe.addActionListener(this);
@@ -162,13 +166,11 @@ public class WWWindow extends JFrame implements ActionListener
         repaint();
     }
     
-    public void actionPerformed(){
-        System.out.println("Something happened");
-    }
-    
     /**
-     * GUI hell begins below
+     * GUI hell begins below.
      */
+    
+    //THIS IS THE PAINT AND REPAINT SECTION. BEWARE ALL YE WHO ENTER HERE
     
     
     public void paint(Graphics g){
@@ -186,6 +188,28 @@ public class WWWindow extends JFrame implements ActionListener
         //The vague scheme of the 600 by 400 window is that the first 400 or so square pixels are dedicated to the grid. The right 200 by 400 pixels go to the menu.
     }
     
+    /**
+     * Called whenever a menu opens.
+     */
+    public void menuSelected(MenuEvent e){
+        ErrorReporter.reportError("Selected");
+    }
+    
+    /**
+     * Called whenever a menu is closed. We repaint at this time to undo the erasure of the bit it covered up.
+     */
+    public void menuDeselected(MenuEvent e){
+        ErrorReporter.reportError("Deselected");
+        repaint();
+    }
+    
+    /**
+     * Called whenever a menu is.. canceled? I don't know what this means, and it has never been triggered during testing. ???
+     * Seems to be for legacy support. Just call deselected, its essentially the same thing.
+     */
+    public void menuCanceled(MenuEvent e){
+        menuDeselected(e);
+    }
     
     
     /**
