@@ -21,14 +21,23 @@ import java.awt.event.*;
  */
 public class WWWindow extends JFrame implements ActionListener, MenuListener
 {
+    
+    //Window stuff
     JMenuBar menuBar;
     JMenu file;
     JMenu pipes;
     JPanel panel;
     int xDimension = 600;
     int yDimension = 400;
-    
     Canvas graphic;
+    
+    //Simulation Stuff
+    PipeNetwork currentNetwork;
+    
+    //These are the dimensions of the pipe network that will be initialized.
+    //In this version, its 8 by 8.
+    int networkX = 8;
+    int networkY = 8;
     
     //TODO List
     
@@ -55,9 +64,10 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
         setUpWindow();
         setUpMenus();
         renderWindow();
-        
-        while(true){
-            
+        if(!loadNetworkFromFile()){
+            //This piece of code runs a function to attempt to load the previously worked upon network.
+            //If that fails, it sets up a blank network.
+            setUpNewNetwork();
         }
     }
     
@@ -195,20 +205,56 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
      * Here is where the grid and pipes are drawn. They take up a 400 by 400 area on the left of the window.
      */
     public void drawGrid(Graphics g, int xOffset, int yOffset){
-        //In this 600 by 400 version of the simulation, the grid is 8 by 8. Each 50x50 square consists of a 1px border and a 48x48 image of a pipe if there is a pipe in that spot there. 
+        //In this 600 by 400 version of the simulation, the grid should be 8 by 8. Each 50x50 square consists of a 1px border and a 48x48 image of a pipe if there is a pipe in that spot there. 
         //This means the borders are 2px thick in total, from the neighbouring pipes.
         
-        //This bit draws the grid lines. TODO: Un-hardcode the lengths once i've implemented PipeNetwork in this class.
+        //This bit draws the grid lines. 
         
-        for(int xCell=0; xCell<8; xCell++){
+        for(int xCell=0; xCell<networkX; xCell++){
             //for each column
-            for(int yCell = 0; yCell<8; yCell++){
+            for(int yCell = 0; yCell<networkY; yCell++){
                 //for each row:
                 //Draw an empty rectangle at the border of these bits.
                 //functionally, xOffset and yOffset are at 0,0. So we add it to every objective coordinate used to draw.
                 //Additionally, for each cell we check what cell it is and move 50px for each, as each is 50px wide/tall.
                 g.drawRect(xOffset+(xCell*50),yOffset+(yCell*50),50,50);
                 
+                //This switch statement takes the relevant cell of the PipeGrid and renders a specific color.
+                //TODO: replace with an image.
+                
+                //Saves teh current color, changes the color, fills the rectangle, and changes it back.
+                
+                //Pipe = blue
+                //Junction = yellow
+                //Source = green
+                //Sink = red
+                //NullPipes aren't drawn.
+                
+                Color defaultCol = g.getColor();
+                
+                switch(currentNetwork.pipeGrid[xCell][yCell].getClass().getName()){
+                    case "Pipe":
+                        g.setColor(Color.BLUE);
+                        g.fillRect(xOffset+(xCell*50)+1,yOffset+(yCell*50)+1,49,49);
+                        break;
+                    case "Junction":
+                        g.setColor(Color.YELLOW);
+                        g.fillRect(xOffset+(xCell*50)+1,yOffset+(yCell*50)+1,49,49);
+                        break;
+                    case "Source":
+                        g.setColor(Color.GREEN);
+                        g.fillRect(xOffset+(xCell*50)+1,yOffset+(yCell*50)+1,49,49);
+                        break;
+                    case "Sink":
+                        g.setColor(Color.RED);
+                        g.fillRect(xOffset+(xCell*50)+1,yOffset+(yCell*50)+1,49,49);
+                        break;
+                    case "NullPipe":
+                        break;
+                    default:
+                        ErrorReporter.reportError("Trying to render invalid pipetype at " + xCell + "," + yCell +".");
+                }
+                g.setColor(defaultCol);
             }
         }
         
@@ -236,5 +282,28 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
      */
     public void menuCanceled(MenuEvent e){
         menuDeselected(e);
+    }
+    
+    
+    
+    /**
+     * Below rests the code for managing the simulation. This includes: 
+     * TODO: save/load systems
+     * TODO: Image management
+     * TODO: Pipe placement
+     */
+    
+    /**
+     * This will try to load a network from file.
+     * it will return true if this is successful and false if not
+     * Until save/load is implemented it always returns false.
+     */
+    public boolean loadNetworkFromFile(){
+        ErrorReporter.reportError("No saved network found.");
+        return false;
+    }
+    
+    public void setUpNewNetwork(){
+        currentNetwork = new PipeNetwork(networkX,networkY);
     }
 }
