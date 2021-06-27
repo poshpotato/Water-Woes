@@ -9,11 +9,6 @@ public class Pipe extends ProtoPipe
 {
     //Flow represents whether or not there is water currently flowing through the pipe.
     private boolean flow;
-    //This int represents the rotation of the ProtoPipe, starting from a "default position" dependent on the ProtoPipe itself.
-    //Pipe has two meaningful rotations, starting with being vertical and proceeding clockwise.
-    private int rotation;
-    public int x;
-    public int y;
     
     /**
      * Constructor for objects of class Pipe

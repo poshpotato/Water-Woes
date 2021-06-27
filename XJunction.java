@@ -9,11 +9,6 @@ public class XJunction extends Junction
 {
     //Flow represents whether or not there is water currently flowing through the pipe.
     private boolean flow;
-    //This int represents the rotation of the ProtoPipe, starting from a "default position" dependent on the ProtoPipe itself.
-    //Rotations do not matter for XJunctions!
-    private int rotation;
-    public int x;
-    public int y;
     
     /**
      * Constructor for objects of class XJunction

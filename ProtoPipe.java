@@ -17,7 +17,7 @@ public abstract class ProtoPipe
     //As an example, the default position for a pipe will be 0, a vertical pipe. Every additional 1 on top of this rotates it 90 degrees.
     //Each ProtoPipe will implement its own code reliant upon this rotation.
     //For example, pipe uses rotation%2 to get its rotation as it only has two meaningful rotations.
-    private int rotation;
+    public int rotation;
     public int x;
     public int y;
     

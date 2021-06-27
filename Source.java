@@ -10,11 +10,6 @@ public class Source extends ProtoPipe
     //Flow represents whether or not there is water currently flowing through the pipe.
     //sources *always* have flow! they're sources!
     private final boolean flow = true;
-    //This int represents the rotation of the ProtoPipe, starting from a "default position" dependent on the ProtoPipe itself.
-    //Source has four meaningful rotations, starting with giving water to the upwards direction at 0 and proceeding clockwise.
-    private int rotation;
-    public int x;
-    public int y;
     
     
     /**

@@ -9,11 +9,6 @@ public class CornerPipe extends Pipe
 {
     //Flow represents whether or not there is water currently flowing through the pipe.
     private boolean flow;
-    //This int represents the rotation of the ProtoPipe, starting from a "default position" dependent on the ProtoPipe itself.
-    //CornerPipe has 4 meaningful rotations, starting at 0 with the most anticlockwise pipe being upwards, or an L shape.
-    private int rotation;
-    public int x;
-    public int y;
     
     /**
      * Constructor for objects of class CornerPipe
