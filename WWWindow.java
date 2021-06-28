@@ -209,7 +209,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
         //This means the borders are 2px thick in total, from the neighbouring pipes.
         
         //This bit draws the grid lines. 
-        
+        //It also draws the pipes as of 28/06/2021
         for(int xCell=0; xCell<networkX; xCell++){
             //for each column
             for(int yCell = 0; yCell<networkY; yCell++){
@@ -219,48 +219,66 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
                 //Additionally, for each cell we check what cell it is and move 50px for each, as each is 50px wide/tall.
                 g.drawRect(xOffset+(xCell*50),yOffset+(yCell*50),50,50);
                 
-                //This switch statement takes the relevant cell of the PipeGrid and renders a specific color.
-                //TODO: replace with an image.
+                //Does a bunch of checks on the image to compile the filename
+                //Pipe images are in /images/
+                //Image names follow the format PipetypeStateRotation
+                //For example, a flowing junction rotated 2 would be JunctionFull2
                 
-                //Saves teh current color, changes the color, fills the rectangle, and changes it back.
+                //Get the pipe in this cell to process.
+                ProtoPipe currentPipe = currentNetwork.pipeGrid[xCell][yCell];
                 
-                //Pipe = blue
-                //Junction = yellow
-                //Source = green
-                //Sink = red
-                //NullPipes aren't drawn.
+                //This will be built into the filename.
+                String fileName = "images/";
                 
-                Color defaultCol = g.getColor();
-                
-                switch(currentNetwork.pipeGrid[xCell][yCell].getClass().getName()){
+                switch(currentPipe.getClass().getName()){
                     case "Pipe":
+                        fileName += "Pipe";
+                        break;
                     case "CornerPipe":
-                        //Pipe and CornerPipe use the same color for now. TODO: Seperate these.
-                        g.setColor(Color.BLUE);
-                        g.fillRect(xOffset+(xCell*50)+1,yOffset+(yCell*50)+1,49,49);
+                        fileName += "CornerPipe";
                         break;
                     case "Junction":
-                        g.setColor(Color.YELLOW);
-                        g.fillRect(xOffset+(xCell*50)+1,yOffset+(yCell*50)+1,49,49);
+                        fileName += "Junction";
                         break;
                     case "XJunction":
-                        g.setColor(Color.ORANGE);
-                        g.fillRect(xOffset+(xCell*50)+1,yOffset+(yCell*50)+1,49,49);
+                        fileName += "XJunction";
                         break;
                     case "Source":
-                        g.setColor(Color.GREEN);
-                        g.fillRect(xOffset+(xCell*50)+1,yOffset+(yCell*50)+1,49,49);
+                        fileName += "Source";
                         break;
                     case "Sink":
-                        g.setColor(Color.RED);
-                        g.fillRect(xOffset+(xCell*50)+1,yOffset+(yCell*50)+1,49,49);
+                        fileName += "Sink";
                         break;
                     case "NullPipe":
+                        //If its null, it shouldn't be rendering an image here. 
+                        //To prevent this breaking, the fileName is checked to see if it contains NullPipe in it 
+                        //and just not render anything if so
+                        fileName += "NullPipe";
                         break;
                     default:
                         ErrorReporter.reportError("Trying to render invalid pipetype at " + xCell + "," + yCell +".");
                 }
-                g.setColor(defaultCol);
+                
+                //then we check if its empty or not.
+                if(currentPipe.getFlow()){
+                    fileName+="Full";
+                }else{
+                    //if not flowing.
+                    fileName += "Empty";
+                }
+                
+                //Then we get rotation.
+                fileName += Integer.toString(currentPipe.rotation);
+                
+                //Then add .png
+                fileName += ".png";
+                
+                //at this point we should be left with fileName being the correct path to the image required.
+                
+                ImageIcon image = new ImageIcon(fileName);
+                System.out.println(fileName);
+                
+                image.paintIcon(this,g,xOffset+(xCell*50)+1,yOffset+(yCell*50)+1);
             }
         }
         
