@@ -26,8 +26,9 @@ public class Sink extends ProtoPipe
      * Pipes should use rotation and isConnected to calculate.
      * A sink's flowrate is just the combined flowrate of the pipes connected to it.
      */
-    public void calcFlowRate(ProtoPipe[][] parentGrid){
-        ErrorReporter.reportError("Sink calculations not implemented yet");
+    public void calcFlowRate(boolean set){
+        //Flowrate doesn't matter man
+        return;
     }
 
     /**
@@ -36,7 +37,6 @@ public class Sink extends ProtoPipe
     public boolean getFlow()
     {
         // why would you need this. this shouldn't be called!
-        ErrorReporter.reportError("Someone wants to get water from a sink. This shouldn't be happening!");
         return false;
     }
     

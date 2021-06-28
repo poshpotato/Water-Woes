@@ -18,15 +18,6 @@ public class CornerPipe extends Pipe
         //Same constructor jazz as the Pipe class, which this extends.
         super(x,y,rotation);
     }
-    
-    
-    /**
-     * CornerPipe's calculation is pretty simple. It checks the flow rate of the pipes its connected to, and gets the flowrate of the non-null one.
-     * TODO: Add direction-checking and actual calculation code here.
-     */
-    public void calcFlowRate(ProtoPipe[][] parentGrid){
-        ErrorReporter.reportError("CornerPipe flow not implemented yet.");
-    }
 
     /**
      * Getter for the flowRate variable, for use in rendering and other pipes' calculations

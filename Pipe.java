@@ -26,8 +26,8 @@ public class Pipe extends ProtoPipe
      * Pipe's calculation is pretty simple. It checks the flow rate of the pipes its connected to, and gets the flowrate of the non-null one.
      * TODO: Add direction-checking and actual calculation code here.
      */
-    public void calcFlowRate(ProtoPipe[][] parentGrid){
-        ErrorReporter.reportError("Pipe flow not implemented yet.");
+    public void calcFlowRate(boolean set){
+        this.flow = set;
     }
 
     /**

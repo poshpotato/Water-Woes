@@ -19,13 +19,6 @@ public class XJunction extends Junction
         super(x,y,rotation);
     }
     
-    /**
-     * Calculates flow based upon the directions its connected to. Takes a parameter of the pipeNetwork it's in so it can get the pipes around it. 
-     * A junction will be on if any of the pipes connected to it have flow.
-     */
-    public void calcFlowRate(ProtoPipe[][] parentGrid){
-        ErrorReporter.reportError("XJunction Flow Not Implemented Yet");
-    }
 
     /**
      * Getter for the flowRate variable, for use in rendering and other pipes' calculations.

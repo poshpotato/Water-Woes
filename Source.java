@@ -26,8 +26,8 @@ public class Source extends ProtoPipe
     /**
      * Theres pretty much no reason to calculate flow rate with a source! It has a constant rate of On.
      */
-    public void calcFlowRate(ProtoPipe[][] parentGrid){
-        
+    public void calcFlowRate(boolean flow){
+        return;
     }
 
     /**

@@ -27,8 +27,11 @@ public abstract class ProtoPipe
     /**
      * Calculates flow based upon the directions its connected to. Takes a parameter of the pipeNetwork it's in so it can get the pipes around it. 
      * Pipes should use rotation and isConnected to calculate whether or not its connected.
+     * 
+     * Note: despite the name of this method, this only sets flow rate.
+     * Calculation is actually done in PipeNetwork
      */
-    public abstract void calcFlowRate(ProtoPipe[][] parentGrid);
+    public abstract void calcFlowRate(boolean set);
     
     
     /**

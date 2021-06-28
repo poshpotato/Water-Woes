@@ -26,8 +26,8 @@ public class Junction extends ProtoPipe
      * Calculates flow based upon the directions its connected to. Takes a parameter of the pipeNetwork it's in so it can get the pipes around it. 
      * A junction will be on if any of the pipes connected to it have flow.
      */
-    public void calcFlowRate(ProtoPipe[][] parentGrid){
-        ErrorReporter.reportError("Junction Flow Not Implemented Yet");
+    public void calcFlowRate(boolean set){
+        this.flow = set;
     }
 
     /**

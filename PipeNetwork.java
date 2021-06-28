@@ -61,9 +61,50 @@ public class PipeNetwork
     public void determineFlowRates()
     {
         //To put it roughly, this algorithm starts from the sources and works along the pipes until it reaches the sinks.
-        //It delays processing junctions until theres no normal pipes to process.
+        ArrayList<ProtoPipe> toProcess = new ArrayList<ProtoPipe>();
         
-        //TODO: write code for this
+        //First we get all the existing Source pipes
+        for(int i = 0; i<sourceList.size();i++){
+            toProcess.add(sourceList.get(i));
+        }
+        
+        
+        for(int i = 0; i<toProcess.size();i++){
+            //This will run for every pipe connected to the sources
+            //It should evaluate the flow of the pipe, and add adjacent pipes connected.
+            ProtoPipe procPipe = toProcess.get(i);
+            
+            //Four seperate if statements for each direction that the pipe could be connected to. No, it's not pretty.
+            //But hopefully, it should work.
+            
+            //it checks
+            //1. Am I connected in this direction?
+            //2. Is the pipe in this direction connected to me?
+            
+            //north
+            if(procPipe.isConnected(0) && pipeGrid[procPipe.x][procPipe.y-1].isConnected(2)){
+                toProcess.add(pipeGrid[procPipe.x][procPipe.y-1]);
+            }
+            
+            //east
+            if(procPipe.isConnected(1) && pipeGrid[procPipe.x+1][procPipe.y].isConnected(3)){
+                toProcess.add(pipeGrid[procPipe.x+1][procPipe.y]);
+            }
+            
+            //south
+            if(procPipe.isConnected(2) && pipeGrid[procPipe.x][procPipe.y+1].isConnected(0)){
+                toProcess.add(pipeGrid[procPipe.x][procPipe.y+1]);
+            }
+            
+            //west
+            if(procPipe.isConnected(3) && pipeGrid[procPipe.x-1][procPipe.y].isConnected(1)){
+                toProcess.add(pipeGrid[procPipe.x-1][procPipe.y]);
+            }
+            
+            //Finally mark this pipe as Full, cause if this is called it should be
+            
+            procPipe.calcFlowRate(true);
+        }
     }
     
     /**
