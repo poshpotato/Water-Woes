@@ -200,7 +200,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
         //The offsets are based on the menu height and some weird factor that means an x of 0 is 8 pixels to the left of the window.
         g.drawRect(xOffset,yOffset,599,400);
         drawGrid(g);
-        drawPipeMenu(g);
+        drawPipeMenu2(g);
         
         //The vague scheme of the 600 by 400 window is that the first 400 or so square pixels are dedicated to the grid. The right 200 by 400 pixels go to the menu.
     }
@@ -333,6 +333,43 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
         //Junction for loop:
         for(int i=0;i<4;i++){
             drawPipeButton(g,"Junction",120,200+(i*50),i);
+        }
+        
+    }
+    
+    public void drawPipeMenu2(Graphics g){
+        //we use seperate for loops, just to simplify some of the code-writing.
+        
+        //The x values are 10, 70, and 130,just to give 10px of space between the 50px images.
+            
+        //Source for loop:
+        for(int i=0;i<4;i++){
+            drawPipeButton(g,"Source",10,5+(i*55),i);
+        }
+        
+        //Sink for loop:
+        for(int i=0;i<4;i++){
+            drawPipeButton(g,"Sink",70,5+(i*55),i);
+        }
+        
+        //Pipe for loop:
+        //(It's only two labels)
+        for(int i=0;i<2;i++){
+            drawPipeButton(g,"Pipe",130,5+(i*55),i);
+        }
+        
+        //XJunction button only has to be drawn once.
+        drawPipeButton(g,"XJunction",130,5+(110),0);
+        
+        //CornerPipes are drawn differently so custom code.
+        drawPipeButton(g,"CornerPipe",10,225,0);
+        drawPipeButton(g,"CornerPipe",10,280,1);
+        drawPipeButton(g,"CornerPipe",70,225,2);
+        drawPipeButton(g,"CornerPipe",70,280,3);
+        
+        //Junction for loop:
+        for(int i=0;i<4;i++){
+            drawPipeButton(g,"Junction",130,170+(i*55),i);
         }
         
     }
