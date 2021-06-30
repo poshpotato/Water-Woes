@@ -19,7 +19,7 @@ public class PipeNetwork
 {
     // pipeGrid stores ProtoPipes, which means all pipes that extend ProtoPipe can be stored and accessed in this array. Empty squares will be left null.
     //pipeGrid is a twodimensional array, where the first represents the column, or x, and the second represents the row, or y.
-    //IMPORTANT: all secondary arrays must be the same length.
+    //IMPORTANT: all secondary arrays must be the same length. TODO: Make all flows reset before calculating.
     public ProtoPipe[][] pipeGrid;
     
     private ArrayList<Source> sourceList = new ArrayList<Source>();

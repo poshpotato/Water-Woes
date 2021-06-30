@@ -31,6 +31,10 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
     int yDimension = 400;
     Canvas graphic;
     
+    
+    int xOffset = 8;
+    int yOffset = 53;
+    
     //Simulation Stuff
     PipeNetwork currentNetwork;
     
@@ -39,10 +43,11 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
     int networkX = 8;
     int networkY = 8;
     
+    JPanel pipePanel;
+    
     //TODO List
     
     //Must do:
-    //Make pipes render
     //Make interactive menu
     //Make grid adjustable
     //Wire up calculations
@@ -82,9 +87,9 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
        
        //Boom. Penl time
-       panel = new JPanel();
-       //same size as window
-       panel.setPreferredSize(new Dimension(xDimension,yDimension));
+       panel = new JPanel(new BorderLayout());
+       //this is where the menu is, and is a third as wide as the window.
+       panel.setPreferredSize(new Dimension(xDimension/3,yDimension));
        
        //I have had to do far too much hardcoding in my GUI code to let someone resize and fuck it all up!
        this.setResizable(false);
@@ -176,6 +181,8 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
         repaint();
     }
     
+    
+    
     /**
      * GUI hell begins below.
      */
@@ -191,8 +198,6 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
         
         //Boundary code. This should be a thin black line around the edge of the screen if the drawing area is 600 by 400.
         //The offsets are based on the menu height and some weird factor that means an x of 0 is 8 pixels to the left of the window.
-        int xOffset = 8;
-        int yOffset = 53;
         g.drawRect(xOffset,yOffset,599,400);
         drawGrid(g, xOffset, yOffset);
         
@@ -204,7 +209,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
     /**
      * Here is where the grid and pipes are drawn. They take up a 400 by 400 area on the left of the window.
      */
-    public void drawGrid(Graphics g, int xOffset, int yOffset){
+    public void drawGrid(Graphics g){
         //In this 600 by 400 version of the simulation, the grid should be 8 by 8. Each 50x50 square consists of a 1px border and a 48x48 image of a pipe if there is a pipe in that spot there. 
         //This means the borders are 2px thick in total, from the neighbouring pipes.
         
@@ -276,13 +281,34 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
                 //at this point we should be left with fileName being the correct path to the image required.
                 
                 ImageIcon image = new ImageIcon(fileName);
-                System.out.println(fileName);
                 
                 image.paintIcon(this,g,xOffset+(xCell*50)+1,yOffset+(yCell*50)+1);
             }
         }
         
     }
+    
+    /**
+     * //The pipe menu should take up the right side of the screen.
+     * //It consists of several clickable images of pipes in their rotations..
+     */
+    public void initPipeMenu(Graphics g){
+        drawPipeButton(g,"Source",10,10,2);
+        
+        
+        
+    }
+    
+    /**
+     * Seperate method to draw a given button for ease of reading and writing.
+     * x and y are the distances from the top left of the menu area.
+     */
+    public void drawPipeButton(Graphics g, String pipeName, int x, int y, int rotation){
+        ImageIcon image = new ImageIcon(pipeName + "Empty" + Integer.toString(rotation));
+        image.paintIcon(this,g,xOffset+400+x,yOffset+400+y);
+    }
+    
+    
     
     
     /**
