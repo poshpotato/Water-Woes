@@ -66,14 +66,14 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
      */
     public WWWindow()
     {
-        setUpWindow();
-        setUpMenus();
-        renderWindow();
         if(!loadNetworkFromFile()){
             //This piece of code runs a function to attempt to load the previously worked upon network.
             //If that fails, it sets up a blank network.
             setUpNewNetwork();
         }
+        setUpWindow();
+        setUpMenus();
+        renderWindow();
     }
     
     /**
@@ -199,7 +199,8 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
         //Boundary code. This should be a thin black line around the edge of the screen if the drawing area is 600 by 400.
         //The offsets are based on the menu height and some weird factor that means an x of 0 is 8 pixels to the left of the window.
         g.drawRect(xOffset,yOffset,599,400);
-        drawGrid(g, xOffset, yOffset);
+        drawGrid(g);
+        drawPipeMenu(g);
         
         //The vague scheme of the 600 by 400 window is that the first 400 or so square pixels are dedicated to the grid. The right 200 by 400 pixels go to the menu.
     }
@@ -289,23 +290,68 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
     }
     
     /**
-     * //The pipe menu should take up the right side of the screen.
-     * //It consists of several clickable images of pipes in their rotations..
+     * The pipe menu should take up the right side of the screen.
+     * It consists of several clickable images of pipes in their rotations.
+     * There are 6 sets of four rotations of pipes, or 24 in total.
+     * If we split these into 6 columns of 4 50x50 pipe buttons
+     * We have a total area of 150x400, which leaves us with 50 px of vertical space to seperate these columns
+     * Thus, 10px between them.
+     * This breaks down when we consider that Pipes and XJunctions only have 2 and 1 rotations respectfully.
+     * Thus, the second row has only two columns. The third top column has only 3. 
+     * For two columns, its 100 wide, so theres 100 free space. 
+     * Ive split this into two 30px gaps to the sides and one 40px gap in the middle
      */
-    public void initPipeMenu(Graphics g){
-        drawPipeButton(g,"Source",10,10,2);
+    public void drawPipeMenu(Graphics g){
+        //we use seperate for loops, just to simplify some of the code-writing.
         
+        //The x values are 10, 70, and 130,just to give 10px of space between the 50px images.
+            
+        //Source for loop:
+        for(int i=0;i<4;i++){
+            drawPipeButton(g,"Source",10,i*50,i);
+        }
         
+        //Sink for loop:
+        for(int i=0;i<4;i++){
+            drawPipeButton(g,"Sink",70,i*50,i);
+        }
+        
+        //Pipe for loop:
+        //(It's only two labels)
+        for(int i=0;i<2;i++){
+            drawPipeButton(g,"Pipe",130,i*50,i);
+        }
+        
+        //XJunction button only has to be drawn once.
+        drawPipeButton(g,"XJunction",130,100,0);
+        
+        //CornerPipe for loop:
+        for(int i=0;i<4;i++){
+            drawPipeButton(g,"CornerPipe",30,200+(i*50),i);
+        }
+        
+        //Junction for loop:
+        for(int i=0;i<4;i++){
+            drawPipeButton(g,"Junction",120,200+(i*50),i);
+        }
         
     }
     
     /**
      * Seperate method to draw a given button for ease of reading and writing.
      * x and y are the distances from the top left of the menu area.
+     * Pipe Buttons should be 50 by 50, similar to the grid.
+     * TODO: WRITE BUTTON INPUT
      */
     public void drawPipeButton(Graphics g, String pipeName, int x, int y, int rotation){
-        ImageIcon image = new ImageIcon(pipeName + "Empty" + Integer.toString(rotation));
-        image.paintIcon(this,g,xOffset+400+x,yOffset+400+y);
+        g.drawRect(xOffset+400+x,yOffset+y,50,50);
+        
+        //This is the reason there are extra Empty source images. Easier to have a few duplicate files than check a bunch of
+        //Class names every time we render.
+        String fileName = "images/" + pipeName + "Empty" + Integer.toString(rotation)+".png";
+        System.out.println(fileName);
+        ImageIcon image = new ImageIcon(fileName);
+        image.paintIcon(this,g,xOffset+400+x+1,yOffset+y+1);
     }
     
     
@@ -315,14 +361,12 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
      * Called whenever a menu opens.
      */
     public void menuSelected(MenuEvent e){
-        ErrorReporter.reportError("Selected");
     }
     
     /**
      * Called whenever a menu is closed. We repaint at this time to undo the erasure of the bit it covered up.
      */
     public void menuDeselected(MenuEvent e){
-        ErrorReporter.reportError("Deselected");
         repaint();
     }
     
