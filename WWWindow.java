@@ -200,7 +200,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
         //The offsets are based on the menu height and some weird factor that means an x of 0 is 8 pixels to the left of the window.
         g.drawRect(xOffset,yOffset,599,400);
         drawGrid(g);
-        drawPipeMenu2(g);
+        drawPipeMenu(g);
         
         //The vague scheme of the 600 by 400 window is that the first 400 or so square pixels are dedicated to the grid. The right 200 by 400 pixels go to the menu.
     }
@@ -332,11 +332,13 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
         
         //Junction for loop:
         for(int i=0;i<4;i++){
-            drawPipeButton(g,"Junction",120,200+(i*50),i);
+            drawPipeButton(g,"Junction",110,200+(i*50),i);
         }
         
     }
     
+    /*
+     * this was an ill-fated other menu design, built around 3 7-high columns.
     public void drawPipeMenu2(Graphics g){
         //we use seperate for loops, just to simplify some of the code-writing.
         
@@ -372,7 +374,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
             drawPipeButton(g,"Junction",130,170+(i*55),i);
         }
         
-    }
+    }*/
     
     /**
      * Seperate method to draw a given button for ease of reading and writing.
