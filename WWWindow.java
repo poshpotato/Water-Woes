@@ -162,7 +162,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
                 ErrorReporter.reportError("Saving isn't currently implemented.");
                 break;
             case "New":
-                ErrorReporter.reportError("TODO: Wire up pipe system.");
+                ErrorReporter.reportError("TODO: Wire up save/load system.");
                 WWWindow l = new WWWindow();
                 break;
             case "Red":
@@ -388,14 +388,11 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
         //This is the reason there are extra Empty source images. Easier to have a few duplicate files than check a bunch of
         //Class names every time we render.
         String fileName = "images/" + pipeName + "Empty" + Integer.toString(rotation)+".png";
-        System.out.println(fileName);
         ImageIcon image = new ImageIcon(fileName);
         image.paintIcon(this,g,xOffset+400+x+1,yOffset+y+1);
     }
     
-    
-    
-    
+     
     /**
      * Called whenever a menu opens.
      */
