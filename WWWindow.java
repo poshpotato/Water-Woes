@@ -19,7 +19,7 @@ import java.awt.event.*;
  * @Jebadiah Dudfield
  * @15/06/2021
  */
-public class WWWindow extends JFrame implements ActionListener, MenuListener
+public class WWWindow extends JFrame implements ActionListener, MenuListener,MouseListener
 {
     
     //Window stuff
@@ -51,13 +51,11 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
     //TODO List
     
     //Must do:
-    //Make interactive menu
     //Make grid adjustable
     //Wire up calculations
     
     //Lower priority:
     //Implement saving and loading
-    //Fix menu not repainting
     
     //If i have copious amounts of time left over:
     //Make cursor change when a pipe is selected.
@@ -65,7 +63,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
     
     
     /**
-     * Constructor for objects of class WWWindow. TODO: Fill this with setup code.
+     * Constructor for objects of class WWWindow. 
      */
     public WWWindow()
     {
@@ -91,7 +89,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
        
        //Boom. Panel time
        //panel = new JPanel(new GridBagLayout());
-       //this is the same size as the content page. This isn't best practice. TODO: Make this thesame as the windows content pane
+       //this is the same size as the content page. This isn't best practice. 
        //panel.setPreferredSize(new Dimension(xDimension,yDimension));
        //this.add(panel);
        
@@ -400,7 +398,6 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
      * Seperate method to draw a given button for ease of reading and writing.
      * x and y are the distances from the top left of the menu area.
      * Pipe Buttons should be 50 by 50, similar to the grid.
-     * TODO: WRITE BUTTON INPUT
      */
     public void drawPipeButton(String pipeName, int x, int y, int rotation){
         //g.drawRect(xOffset+400+x,yOffset+y,50,50);
@@ -420,6 +417,34 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
     } 
     
      
+    
+    
+    
+    
+    /**
+     * Below rests the code for managing the simulation. This includes: 
+     * TODO: save/load systems
+     * TODO: Pipe placement
+     */
+    
+    /**
+     * This will try to load a network from file.
+     * it will return true if this is successful and false if not
+     * Until save/load is implemented it always returns false.
+     */
+    public boolean loadNetworkFromFile(){
+        ErrorReporter.reportError("No saved network found.");
+        return false;
+    }
+    
+    public void setUpNewNetwork(){
+        currentNetwork = new PipeNetwork(networkX,networkY);
+    }
+    
+    /**
+     * Obligatory inherited event listeners rest below.
+     */
+    
     /**
      * Called whenever a menu opens.
      */
@@ -441,26 +466,29 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
         menuDeselected(e);
     }
     
-    
-    
-    /**
-     * Below rests the code for managing the simulation. This includes: 
-     * TODO: save/load systems
-     * TODO: Image management
-     * TODO: Pipe placement
-     */
-    
-    /**
-     * This will try to load a network from file.
-     * it will return true if this is successful and false if not
-     * Until save/load is implemented it always returns false.
-     */
-    public boolean loadNetworkFromFile(){
-        ErrorReporter.reportError("No saved network found.");
-        return false;
+    public void mouseClicked(MouseEvent e){
+        //TODO: put pipe placement code in here
+        System.out.println("mouseClicked");
+        System.out.println(e.getX() + "," + e.getY());
+        System.out.println("Button " + e.getButton() + " pressed.");
+        
     }
     
-    public void setUpNewNetwork(){
-        currentNetwork = new PipeNetwork(networkX,networkY);
+    public void mousePressed(MouseEvent e){
+        
     }
+    
+    public void mouseExited(MouseEvent e){
+        
+    }
+    
+    public void mouseEntered(MouseEvent e){
+        
+    }
+    
+    public void mouseReleased(MouseEvent e){
+        
+    }
+    
+    
 }
