@@ -45,8 +45,8 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
     //This records the String of whatever pipe you currently have selected.
     //In the format TypeEmptyRotation
     //Its always empty because string parsing weirdness. its fine.
-    //"none is the default value and is used to indicate nothing being selected."
-    String selectedPipe = "none";
+    //"None" is the default value and is used to indicate nothing being selected.
+    String selectedPipe = "None";
     
     //TODO List
     
@@ -85,6 +85,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
        
        
        this.getContentPane().setPreferredSize(new Dimension(xDimension,yDimension)); 
+       this.getContentPane().addMouseListener(this);
        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
        
        //Boom. Panel time
@@ -468,10 +469,40 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
     
     public void mouseClicked(MouseEvent e){
         //TODO: put pipe placement code in here
-        System.out.println("mouseClicked");
-        System.out.println(e.getX() + "," + e.getY());
-        System.out.println("Button " + e.getButton() + " pressed.");
+        //System.out.println("mouseClicked");
+        //System.out.println(e.getX() + "," + e.getY());
+        //System.out.println("Button " + e.getButton() + " pressed.");
         
+        //When the mouse is clicked, we only have to check what its clicking on if its not a button; e.g if its in the grid
+        //The first 400x400 pixels of the screen. If its not, return immediately. don't bother running anything else.
+        //Also, check if theres no pipe selected. Don't do anything if theres no pipe selected, either.
+        if(!(e.getX() < 400) || selectedPipe.equals("None")){
+            return;
+        }
+        
+        //Then, we figure out what grid cell  its on. Each is 50x50, so the simplest solution is to:
+        //Divide by 50
+        //Round down (down so that they match the x and y of the arrays position, e.g. the first cell is at 0,0)
+        int gridX = (int)Math.floor(e.getX()/50);
+        int gridY = (int)Math.floor(e.getY()/50);
+        System.out.println(gridX + "," + gridY);
+        
+        //Once we have the position to place a pipe, we need to parse selectedPipe to figure out which to place.
+        //The type of pipe is the first x characters. Unfortunately, they have different lengths.
+        //Fortunately, substring exists! We take off the last 6 characters (1E-2m-3p-4t-5y-6r where r is the rotation int)
+        String placePipeName = selectedPipe.substring(0,selectedPipe.length() - 6);
+        System.out.println(placePipeName);
+        //Similarly we get the rotation by getting the last character of the string, and converting it to int.
+        int placePipeRotation = Character.getNumericValue(selectedPipe.charAt(selectedPipe.length()-1));
+        System.out.println(placePipeRotation);
+        
+        //Finally add the actual pipe.
+        currentNetwork.addPipe(placePipeName, gridX, gridY, placePipeRotation);        
+        
+        //Then, repaint to reflect the changes.
+        repaint();
+        
+        //TODO: Call pipe recalculation here.
     }
     
     public void mousePressed(MouseEvent e){
