@@ -42,6 +42,12 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
     int networkX = 8;
     int networkY = 8;
     
+    //This records the String of whatever pipe you currently have selected.
+    //In the format TypeEmptyRotation
+    //Its always empty because string parsing weirdness. its fine.
+    //"none is the default value and is used to indicate nothing being selected."
+    String selectedPipe = "none";
+    
     //TODO List
     
     //Must do:
@@ -148,32 +154,45 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
     }
     
     public void actionPerformed(ActionEvent e){
-        String cmd = e.getActionCommand();
-        //Switch statement to identify option selected.
-        switch(cmd){
-            case "Quit":
-                System.exit(0);
-                break;
-            case "Save":
-                ErrorReporter.reportError("Saving isn't currently implemented.");
-                break;
-            case "New":
-                ErrorReporter.reportError("TODO: Wire up save/load system.");
-                WWWindow l = new WWWindow();
-                break;
-            case "Red":
-                this.getContentPane().setBackground(Color.RED);
-                break;
-            case "Blue":
-                this.getContentPane().setBackground(Color.BLUE);
-                break;
-            case "Green":
-                this.getContentPane().setBackground(Color.GREEN);
-                break;
-            default:
-                ErrorReporter.reportError("Invalid Option \"" + cmd + "\".");
-                break;
+        
+        String cmd = "defaultCmd";
+        //To identify the source as a button we check its name, then cast it as a button into a seperate ibject. inelegant AND clunky! two for two!
+        if(e.getSource() instanceof JButton){
+            //If it is an image button:
+            JButton butt = (JButton)e.getSource();
+            //first we take out the images/ bit
+            System.out.println(butt.getName());
+            String[] parts = butt.getName().split("/");
+            parts = parts[1].split("\\.");
+            System.out.println(Integer.toString(parts.length));
+            cmd = parts[0];
+            //Now we're left with something like SourceEmpty0.
+            //We then set the currently selected pipe to this.
+            selectedPipe = cmd;
+        } else{
+            cmd = e.getActionCommand();
+            //Switch statement to identify option selected.
+            //Handles menus.
+            switch(cmd){
+                case "Quit":
+                    System.exit(0);
+                    break;
+                case "Save":
+                    ErrorReporter.reportError("Saving isn't currently implemented.");
+                    break;
+                case "New":
+                    ErrorReporter.reportError("TODO: Wire up save/load system.");
+                    WWWindow l = new WWWindow();
+                    break;
+                default:
+                    ErrorReporter.reportError("Invalid Option \"" + cmd + "\".");
+                    break;
+            }
         }
+        
+        //This also handles buttons. All the buttons are image buttons; their name is the file path.
+        
+        
         repaint();
     }
     
@@ -393,6 +412,10 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
         //image.paintIcon(this,g,xOffset+400+x+1,yOffset+y+1);
         JButton pipeButton = new JButton(image);
         pipeButton.setBounds(xOffset+400+x+1,y+1,50,50);
+        //For the buttons to do anything, they have to have an action listener and be named.
+        //For simplicity they're named by their filenames.
+        pipeButton.addActionListener(this);
+        pipeButton.setName(fileName);
         this.add(pipeButton);
     } 
     
