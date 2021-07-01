@@ -4,6 +4,8 @@
 
 
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 /**
  * PipeNetwork class represents the higher structure of the network of pipes.
  * 
@@ -63,6 +65,15 @@ public class PipeNetwork
         //To put it roughly, this algorithm starts from the sources and works along the pipes until it reaches the sinks.
         ArrayList<ProtoPipe> toProcess = new ArrayList<ProtoPipe>();
         
+        //Before the actual calculations, we have to reset all flows. To do this we simply cycle through the pipes and run calcFlow(false);
+        
+        for(int i = 0; i<pipeGrid.length;i++){
+            for(int j = 0; j<pipeGrid[0].length;j++ ){
+                pipeGrid[i][j].calcFlowRate(false);
+            }
+        }
+        
+        
         //First we get all the existing Source pipes
         for(int i = 0; i<sourceList.size();i++){
             toProcess.add(sourceList.get(i));
@@ -80,24 +91,26 @@ public class PipeNetwork
             //it checks
             //1. Am I connected in this direction?
             //2. Is the pipe in this direction connected to me?
+            //3. Is the pipe in this direction not in the ArrayList/hasn't already been processed?
+            //If all of these are true, it adds the pipe to the ArrayList to process later.
             
             //north
-            if(procPipe.isConnected(0) && pipeGrid[procPipe.x][procPipe.y-1].isConnected(2)){
+            if(procPipe.isConnected(0) && pipeGrid[procPipe.x][procPipe.y-1].isConnected(2) && !toProcess.contains(pipeGrid[procPipe.x][procPipe.y-1])){
                 toProcess.add(pipeGrid[procPipe.x][procPipe.y-1]);
             }
             
             //east
-            if(procPipe.isConnected(1) && pipeGrid[procPipe.x+1][procPipe.y].isConnected(3)){
+            if(procPipe.isConnected(1) && pipeGrid[procPipe.x+1][procPipe.y].isConnected(3) && !toProcess.contains(pipeGrid[procPipe.x+1][procPipe.y])){
                 toProcess.add(pipeGrid[procPipe.x+1][procPipe.y]);
             }
             
             //south
-            if(procPipe.isConnected(2) && pipeGrid[procPipe.x][procPipe.y+1].isConnected(0)){
+            if(procPipe.isConnected(2) && pipeGrid[procPipe.x][procPipe.y+1].isConnected(0) && !toProcess.contains(pipeGrid[procPipe.x][procPipe.y+1])){
                 toProcess.add(pipeGrid[procPipe.x][procPipe.y+1]);
             }
             
             //west
-            if(procPipe.isConnected(3) && pipeGrid[procPipe.x-1][procPipe.y].isConnected(1)){
+            if(procPipe.isConnected(3) && pipeGrid[procPipe.x-1][procPipe.y].isConnected(1) && !toProcess.contains(pipeGrid[procPipe.x-1][procPipe.y])){
                 toProcess.add(pipeGrid[procPipe.x-1][procPipe.y]);
             }
             

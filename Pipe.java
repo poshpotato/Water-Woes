@@ -28,6 +28,7 @@ public class Pipe extends ProtoPipe
      */
     public void calcFlowRate(boolean set){
         this.flow = set;
+        System.out.println("testo" + flow);
     }
 
     /**

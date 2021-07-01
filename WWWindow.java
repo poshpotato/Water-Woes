@@ -56,6 +56,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
     
     //Lower priority:
     //Implement saving and loading
+    //Move rendering system to seperate panel with custom paintComponent methods.
     
     //If i have copious amounts of time left over:
     //Make cursor change when a pipe is selected.
@@ -160,10 +161,10 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
             //If it is an image button:
             JButton butt = (JButton)e.getSource();
             //first we take out the images/ bit
-            System.out.println(butt.getName());
+            //System.out.println(butt.getName());
             String[] parts = butt.getName().split("/");
             parts = parts[1].split("\\.");
-            System.out.println(Integer.toString(parts.length));
+            //System.out.println(Integer.toString(parts.length));
             cmd = parts[0];
             //Now we're left with something like SourceEmpty0.
             //We then set the currently selected pipe to this.
@@ -293,6 +294,8 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
                 fileName += ".png";
                 
                 //at this point we should be left with fileName being the correct path to the image required.
+                
+                System.out.println(fileName);
                 
                 ImageIcon image = new ImageIcon(fileName);
                 
@@ -468,7 +471,6 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
     }
     
     public void mouseClicked(MouseEvent e){
-        //TODO: put pipe placement code in here
         //System.out.println("mouseClicked");
         //System.out.println(e.getX() + "," + e.getY());
         //System.out.println("Button " + e.getButton() + " pressed.");
@@ -485,16 +487,16 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
         //Round down (down so that they match the x and y of the arrays position, e.g. the first cell is at 0,0)
         int gridX = (int)Math.floor(e.getX()/50);
         int gridY = (int)Math.floor(e.getY()/50);
-        System.out.println(gridX + "," + gridY);
+        //System.out.println(gridX + "," + gridY);
         
         //Once we have the position to place a pipe, we need to parse selectedPipe to figure out which to place.
         //The type of pipe is the first x characters. Unfortunately, they have different lengths.
         //Fortunately, substring exists! We take off the last 6 characters (1E-2m-3p-4t-5y-6r where r is the rotation int)
         String placePipeName = selectedPipe.substring(0,selectedPipe.length() - 6);
-        System.out.println(placePipeName);
+        //System.out.println(placePipeName);
         //Similarly we get the rotation by getting the last character of the string, and converting it to int.
         int placePipeRotation = Character.getNumericValue(selectedPipe.charAt(selectedPipe.length()-1));
-        System.out.println(placePipeRotation);
+        //System.out.println(placePipeRotation);
         
         //Finally add the actual pipe.
         currentNetwork.addPipe(placePipeName, gridX, gridY, placePipeRotation);        
@@ -502,7 +504,10 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
         //Then, repaint to reflect the changes.
         repaint();
         
-        //TODO: Call pipe recalculation here.
+        //Recalculate flow. It does this here because when it's updated is the only time flows will change.
+        currentNetwork.determineFlowRates();
+        
+        
     }
     
     public void mousePressed(MouseEvent e){
