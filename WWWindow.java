@@ -29,7 +29,6 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
     JPanel panel;
     int xDimension = 600;
     int yDimension = 400;
-    Canvas graphic;
     
     
     int xOffset = 8;
@@ -42,8 +41,6 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
     //In this version, its 8 by 8.
     int networkX = 8;
     int networkY = 8;
-    
-    JPanel pipePanel;
     
     //TODO List
     
@@ -86,16 +83,14 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
        this.getContentPane().setPreferredSize(new Dimension(xDimension,yDimension)); 
        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
        
-       //Boom. Penl time
-       panel = new JPanel(new BorderLayout());
-       //this is where the menu is, and is a third as wide as the window.
-       panel.setPreferredSize(new Dimension(xDimension/3,yDimension));
+       //Boom. Panel time
+       //panel = new JPanel(new GridBagLayout());
+       //this is the same size as the content page. This isn't best practice. TODO: Make this thesame as the windows content pane
+       //panel.setPreferredSize(new Dimension(xDimension,yDimension));
+       //this.add(panel);
        
        //I have had to do far too much hardcoding in my GUI code to let someone resize and fuck it all up!
        this.setResizable(false);
-    
-       Canvas graphic = new Canvas();
-       panel.add(graphic);
     }
     
     /**
@@ -134,7 +129,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
         file.add(quit);
         
         //Pipes menu. Changes selected Pipe.
-        pipes = new JMenu("Pipes");
+        /*pipes = new JMenu("Pipes");
         pipes.addMenuListener(this);
         menuBar.add(pipes);
         JMenuItem pipe = new JMenuItem("Pipe");
@@ -148,7 +143,8 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
         pipes.add(source);
         JMenuItem sink = new JMenuItem("Sink");
         sink.addActionListener(this);
-        pipes.add(sink);
+        pipes.add(sink);*/
+        drawPipeMenu();
     }
     
     public void actionPerformed(ActionEvent e){
@@ -200,7 +196,6 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
         //The offsets are based on the menu height and some weird factor that means an x of 0 is 8 pixels to the left of the window.
         g.drawRect(xOffset,yOffset,599,400);
         drawGrid(g);
-        drawPipeMenu(g);
         
         //The vague scheme of the 600 by 400 window is that the first 400 or so square pixels are dedicated to the grid. The right 200 by 400 pixels go to the menu.
     }
@@ -301,40 +296,46 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
      * For two columns, its 100 wide, so theres 100 free space. 
      * Ive split this into two 30px gaps to the sides and one 40px gap in the middle
      */
-    public void drawPipeMenu(Graphics g){
+    public void drawPipeMenu(){
         //we use seperate for loops, just to simplify some of the code-writing.
         
         //The x values are 10, 70, and 130,just to give 10px of space between the 50px images.
             
         //Source for loop:
         for(int i=0;i<4;i++){
-            drawPipeButton(g,"Source",10,i*50,i);
+            drawPipeButton("Source",10,i*50,i);
         }
         
         //Sink for loop:
         for(int i=0;i<4;i++){
-            drawPipeButton(g,"Sink",70,i*50,i);
+            drawPipeButton("Sink",70,i*50,i);
         }
         
         //Pipe for loop:
         //(It's only two labels)
         for(int i=0;i<2;i++){
-            drawPipeButton(g,"Pipe",130,i*50,i);
+            drawPipeButton("Pipe",130,i*50,i);
         }
         
         //XJunction button only has to be drawn once.
-        drawPipeButton(g,"XJunction",130,100,0);
+        drawPipeButton("XJunction",130,100,0);
         
         //CornerPipe for loop:
         for(int i=0;i<4;i++){
-            drawPipeButton(g,"CornerPipe",30,200+(i*50),i);
+            drawPipeButton("CornerPipe",30,200+(i*50),i);
         }
         
         //Junction for loop:
         for(int i=0;i<4;i++){
-            drawPipeButton(g,"Junction",110,200+(i*50),i);
+            drawPipeButton("Junction",110,200+(i*50),i);
         }
         
+        //Last element added appears on to fill entire frame for some reason, covering everything else.
+        //So we add an invisible button to cover the screen
+        //I really really really don't like this, and if I had more time I would absolutely set up a proper layout.
+        JButton emptyButton = new JButton();
+        emptyButton.setVisible(false);
+        this.add(emptyButton);
     }
     
     /*
@@ -382,15 +383,18 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener
      * Pipe Buttons should be 50 by 50, similar to the grid.
      * TODO: WRITE BUTTON INPUT
      */
-    public void drawPipeButton(Graphics g, String pipeName, int x, int y, int rotation){
-        g.drawRect(xOffset+400+x,yOffset+y,50,50);
+    public void drawPipeButton(String pipeName, int x, int y, int rotation){
+        //g.drawRect(xOffset+400+x,yOffset+y,50,50);
         
         //This is the reason there are extra Empty source images. Easier to have a few duplicate files than check a bunch of
         //Class names every time we render.
         String fileName = "images/" + pipeName + "Empty" + Integer.toString(rotation)+".png";
         ImageIcon image = new ImageIcon(fileName);
-        image.paintIcon(this,g,xOffset+400+x+1,yOffset+y+1);
-    }
+        //image.paintIcon(this,g,xOffset+400+x+1,yOffset+y+1);
+        JButton pipeButton = new JButton(image);
+        pipeButton.setBounds(xOffset+400+x+1,y+1,50,50);
+        this.add(pipeButton);
+    } 
     
      
     /**
