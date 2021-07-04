@@ -8,7 +8,6 @@
 public class XJunction extends Junction
 {
     //Flow represents whether or not there is water currently flowing through the pipe.
-    private boolean flow;
     
     /**
      * Constructor for objects of class XJunction
@@ -27,7 +26,7 @@ public class XJunction extends Junction
     public boolean getFlow()
     {
         // put your code here
-        return flow;
+        return super.getFlow();
     }
     
     /**

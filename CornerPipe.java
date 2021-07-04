@@ -7,8 +7,7 @@
  */
 public class CornerPipe extends Pipe
 {
-    //Flow represents whether or not there is water currently flowing through the pipe.
-    private boolean flow;
+    //Flow represents whether or not there is water currently flowing through the pipe,
     
     /**
      * Constructor for objects of class CornerPipe
@@ -25,7 +24,7 @@ public class CornerPipe extends Pipe
     public boolean getFlow()
     {
         // put your code here
-        return flow;
+        return super.getFlow();
     }
     
     /**
