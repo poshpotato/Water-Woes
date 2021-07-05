@@ -12,3 +12,5 @@ On the left two-thirds of the screen sits an 8x8 grid for you to craft your netw
 On the right third of the screen sits the menu of buttons depicting all pipes and rotations available to you.
 Simply click a pipe to select it, and click the grid to place the currently selected pipe.
 Sources, the round blue pipes, are the source of water. Any pipes connected to these sources will be filled with water.
+In the case that you wish to remove a pipe, simply right click the pipe. 
+Regardless of pipe selected, this will remove the pipe in the clicked space.
