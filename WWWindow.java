@@ -51,11 +51,9 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
     //TODO List
     
     //Must do:
-    //Make grid adjustable
-    //Wire up calculations
+    //Implement saving and loading
     
     //Lower priority:
-    //Implement saving and loading
     //Move rendering system to seperate panel with custom paintComponent methods.
     //Add option in menu for no pipe/remove pipe.
     
