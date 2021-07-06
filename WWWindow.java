@@ -2,6 +2,8 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import java.util.*;
 /**
  * The WWWindow class is a Jframe used for the main GUI of the simulation.
  *
@@ -294,7 +296,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
                 
                 //at this point we should be left with fileName being the correct path to the image required.
                 
-                System.out.println(fileName);
+                //System.out.println(fileName);
                 
                 ImageIcon image = new ImageIcon(fileName);
                 
@@ -434,14 +436,85 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
      * This will try to load a network from file.
      * it will return true if this is successful and false if not
      * Until save/load is implemented it always returns false.
+     * Saves are stored in the save.csv file.
      */
     public boolean loadNetworkFromFile(){
-        ErrorReporter.reportError("No saved network found.");
+        File saveFile = new File("save.csv");
+        
+        Scanner fileRead;
+        try{
+             fileRead = new Scanner(new File("save.csv"));
+        } catch (FileNotFoundException e){
+            //This means that theres not a file to load from.
+            ErrorReporter.reportError("No saved network found.");
+            return false;
+        }
+        
+        //If the Scanner is set up well, its now connected to the csv.
+        //First we get an array of strings representing the lines of the csv, which in turn
+        //represent the rows of the grid.
+        String[] saveLines = new String[networkY];
+        //then we fill this array. Constrained by there being lines and the linecount theres supposed to be.
+        int lineCount = 0;
+        while(fileRead.hasNextLine() && lineCount < networkY){
+            saveLines[lineCount] = fileRead.nextLine();
+            lineCount++;
+        }
+        
+        //At this point lineCount should be the same as networkY. If it isn't, something's gone wrong with the save file.
+        if(lineCount != networkY){
+            ErrorReporter.reportError("Unmatching line counts. Save file should have "
+            + networkY + " lines, but has " + lineCount + "instead.");
+            //TODO: Make this reset the save file to nullPipes
+            return false;
+        }
+        
+        //new variable to track the elements on each line.
+        int elementCount = 0;
+        
+        //next, we create a pipeNetwork based on this.
+        
+        PipeNetwork loadNetwork = new PipeNetwork(networkX,networkY);
+        
+        for(int i = 0; i<networkY; i++){
+            //for each line:
+            //We split the row elements
+            String[] rowElements = saveLines[i].split(",");
+            
+            //Then we check theres the right amount of elements in each row
+            if(rowElements.length != networkX){
+                ErrorReporter.reportError("Unmatching element counts. Save file row " + i + "should have "
+                + networkX + " lines, but has " + rowElements.length + "instead.");
+                return false;
+            }
+            
+            //Then, we read with another for loop.
+            for(int j = 0; j<networkX; j++){
+                //Where i is the row number and j is the column:
+                //loadNetwork.addPipe() = rowElements[j];
+                System.out.print(rowElements[j]);
+            }
+            
+            System.out.println("");
+        }
+        
+
+        
+        //TODO: make this return true once this method is made
         return false;
     }
     
     public void setUpNewNetwork(){
         currentNetwork = new PipeNetwork(networkX,networkY);
+    }
+    
+    /**
+     * This method saves the current network as a csv with pipe names.
+     * Parameters: none.
+     * Returns: boolean representing the success/failure of the saving process.
+     */
+    public boolean saveNetwork(){
+        return false;
     }
     
     /**
