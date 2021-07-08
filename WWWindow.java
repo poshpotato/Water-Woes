@@ -485,19 +485,24 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
             if(rowElements.length != networkX){
                 ErrorReporter.reportError("Unmatching element counts. Save file row " + i + "should have "
                 + networkX + " lines, but has " + rowElements.length + "instead.");
+                //TODO: Make this reset the save file to nullPipes
                 return false;
             }
             
             //Then, we read with another for loop.
             for(int j = 0; j<networkX; j++){
                 //Where i is the row number and j is the column:
-                //loadNetwork.addPipe() = rowElements[j];
-                System.out.print(rowElements[j]);
+                //Well, we need to extract the rotation. This should be a single-character int at the end of the string.
+                String name = rowElements[j].substring(0,rowElements[j].length() - 1);
+                int rotCur = Integer.parseInt(String.valueOf(rowElements[j].charAt(rowElements[j].length()-1)));
+                
+                if(!(name.equals("NullPipe") || name.equals(" NullPipe"))){loadNetwork.addPipe(name, j, i, rotCur);}
+                
+                System.out.println(name + ", " + rotCur);
             }
             
-            System.out.println("");
         }
-        
+        DebugClass.printNetwork(loadNetwork);
 
         
         //TODO: make this return true once this method is made
