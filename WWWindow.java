@@ -53,7 +53,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
     //TODO List
     
     //Must do:
-    //Implement saving and loading
+    //Implement saving
     
     //Lower priority:
     //Move rendering system to seperate panel with custom paintComponent methods.
@@ -69,8 +69,11 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
      */
     public WWWindow()
     {
-        if(!loadNetworkFromFile()){
+        if(loadNetworkFromFile()){
             //This piece of code runs a function to attempt to load the previously worked upon network.
+            //If that works, it has to calculate with the loaded pipes to ensure it displays correctly.
+            currentNetwork.determineFlowRates();
+        }else{
             //If that fails, it sets up a blank network.
             setUpNewNetwork();
         }
