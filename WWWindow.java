@@ -463,9 +463,8 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
         
         //At this point lineCount should be the same as networkY. If it isn't, something's gone wrong with the save file.
         if(lineCount != networkY){
-            ErrorReporter.reportError("Unmatching line counts. Save file should have "
+            ErrorReporter.reportError("Incorrent line count in save file. Save file should have "
             + networkY + " lines, but has " + lineCount + "instead.");
-            //TODO: Make this reset the save file to nullPipes
             return false;
         }
         
@@ -483,9 +482,8 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
             
             //Then we check theres the right amount of elements in each row
             if(rowElements.length != networkX){
-                ErrorReporter.reportError("Unmatching element counts. Save file row " + i + "should have "
+                ErrorReporter.reportError("Incorrect element count in save file. Save file row " + i + "should have "
                 + networkX + " lines, but has " + rowElements.length + "instead.");
-                //TODO: Make this reset the save file to nullPipes
                 return false;
             }
             
@@ -498,15 +496,15 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
                 
                 if(!(name.equals("NullPipe") || name.equals(" NullPipe"))){loadNetwork.addPipe(name, j, i, rotCur);}
                 
-                System.out.println(name + ", " + rotCur);
+                //System.out.println(name + ", " + rotCur);
             }
             
         }
         DebugClass.printNetwork(loadNetwork);
-
+        this.currentNetwork = loadNetwork;
         
         //TODO: make this return true once this method is made
-        return false;
+        return true;
     }
     
     public void setUpNewNetwork(){
