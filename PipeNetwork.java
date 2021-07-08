@@ -1,4 +1,4 @@
-
+ 
 
 
 
@@ -90,27 +90,28 @@ public class PipeNetwork
             
             //it checks
             //1. Am I connected in this direction?
+            //1.5. Is this direction the border?
             //2. Is the pipe in this direction connected to me?
             //3. Is the pipe in this direction not in the ArrayList/hasn't already been processed?
             //If all of these are true, it adds the pipe to the ArrayList to process later.
             
             //north
-            if(procPipe.isConnected(0) && pipeGrid[procPipe.x][procPipe.y-1].isConnected(2) && !toProcess.contains(pipeGrid[procPipe.x][procPipe.y-1])){
+            if(procPipe.isConnected(0) && !(procPipe.y <= 0) && pipeGrid[procPipe.x][procPipe.y-1].isConnected(2) && !toProcess.contains(pipeGrid[procPipe.x][procPipe.y-1])){
                 toProcess.add(pipeGrid[procPipe.x][procPipe.y-1]);
             }
             
             //east
-            if(procPipe.isConnected(1) && pipeGrid[procPipe.x+1][procPipe.y].isConnected(3) && !toProcess.contains(pipeGrid[procPipe.x+1][procPipe.y])){
+            if(procPipe.isConnected(1) && !(procPipe.x >= pipeGrid.length-1) && pipeGrid[procPipe.x+1][procPipe.y].isConnected(3) && !toProcess.contains(pipeGrid[procPipe.x+1][procPipe.y])){
                 toProcess.add(pipeGrid[procPipe.x+1][procPipe.y]);
             }
             
             //south
-            if(procPipe.isConnected(2) && pipeGrid[procPipe.x][procPipe.y+1].isConnected(0) && !toProcess.contains(pipeGrid[procPipe.x][procPipe.y+1])){
+            if(procPipe.isConnected(2) && !(procPipe.y >= pipeGrid[0].length-1) && pipeGrid[procPipe.x][procPipe.y+1].isConnected(0) && !toProcess.contains(pipeGrid[procPipe.x][procPipe.y+1])){
                 toProcess.add(pipeGrid[procPipe.x][procPipe.y+1]);
             }
             
             //west
-            if(procPipe.isConnected(3) && pipeGrid[procPipe.x-1][procPipe.y].isConnected(1) && !toProcess.contains(pipeGrid[procPipe.x-1][procPipe.y])){
+            if(procPipe.isConnected(3) && !(procPipe.x <= 0) && pipeGrid[procPipe.x-1][procPipe.y].isConnected(1) && !toProcess.contains(pipeGrid[procPipe.x-1][procPipe.y])){
                 toProcess.add(pipeGrid[procPipe.x-1][procPipe.y]);
             }
             
