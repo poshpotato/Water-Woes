@@ -163,6 +163,10 @@ public class PipeNetwork
             case "Sink":
                 pipeGrid[x][y] = new Sink(x,y,rotation%4);
                 break;
+            case "NullPipe":
+                //if its trying to add a NullPipe, you probably just dont want to change anything.
+                System.out.println("Trying to add NullPipe at " + x + "," + y);
+                break;
             default:
                 ErrorReporter.reportError("Invalid Pipe Type \"" + type + "\", Canon pipe types are \"Pipe\", \"Junction\", \"Source\", and \"Sink\"");
                 break;

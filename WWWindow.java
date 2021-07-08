@@ -74,6 +74,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
             //If that fails, it sets up a blank network.
             setUpNewNetwork();
         }
+        //testLoad();
         setUpWindow();
         setUpMenus();
         renderWindow();
@@ -438,9 +439,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
      * Until save/load is implemented it always returns false.
      * Saves are stored in the save.csv file.
      */
-    public boolean loadNetworkFromFile(){
-        File saveFile = new File("save.csv");
-        
+    public boolean loadNetworkFromFile(){        
         Scanner fileRead;
         try{
              fileRead = new Scanner(new File("save.csv"));
@@ -458,6 +457,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
         int lineCount = 0;
         while(fileRead.hasNextLine() && lineCount < networkY){
             saveLines[lineCount] = fileRead.nextLine();
+            if(lineCount<2){System.out.println(saveLines[lineCount]);}
             lineCount++;
         }
         
@@ -494,7 +494,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
                 String name = rowElements[j].substring(0,rowElements[j].length() - 1);
                 int rotCur = Integer.parseInt(String.valueOf(rowElements[j].charAt(rowElements[j].length()-1)));
                 
-                if(!(name.equals("NullPipe") || name.equals(" NullPipe"))){loadNetwork.addPipe(name, j, i, rotCur);}
+                if(!name.equals("NullPipe")){loadNetwork.addPipe(name, j, i, rotCur);}
                 
                 //System.out.println(name + ", " + rotCur);
             }
@@ -506,6 +506,26 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
         //TODO: make this return true once this method is made
         return true;
     }
+    
+    /*public void testLoad(){
+         Scanner fileRead = null;
+        try{
+             fileRead = new Scanner(new File("roll.csv"));
+        } catch (FileNotFoundException e){
+        }
+        
+        //If the Scanner is set up well, its now connected to the csv.
+        //First we get an array of strings representing the lines of the csv, which in turn
+        //represent the rows of the grid.
+        String[] saveLines = new String[networkY];
+        while(fileRead.hasNextLine()){
+            //saveLines[lineCount] = fileRead.nextLine();
+            System.out.println(fileRead.nextLine());
+            //if(lineCount<2){System.out.println(saveLines[lineCount]);}
+            
+        }
+    
+    }*/
     
     public void setUpNewNetwork(){
         currentNetwork = new PipeNetwork(networkX,networkY);
