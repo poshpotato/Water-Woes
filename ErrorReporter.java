@@ -1,4 +1,6 @@
 
+import javax.swing.JOptionPane;
+import javax.swing.JFrame;
 /**
  * Handles error reporting to console or gui.
  *
@@ -15,6 +17,7 @@ public class ErrorReporter
      */
     public static void reportError(String errormsg)
     {
+        JOptionPane.showMessageDialog(new JFrame(),errormsg);
         System.out.println(errormsg);
     }
 }

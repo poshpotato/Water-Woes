@@ -184,6 +184,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
                     System.exit(0);
                     break;
                 case "Save":
+                    ErrorReporter.reportError("testing out those dialogs");
                     saveNetwork();
                     break;
                 case "New":
