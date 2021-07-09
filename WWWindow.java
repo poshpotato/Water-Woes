@@ -187,7 +187,8 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
                     saveNetwork();
                     break;
                 case "New":
-                    ErrorReporter.reportError("TODO: Make this clear the grid and save.");
+                    setUpNewNetwork();
+                    repaint();
                     break;
                 default:
                     ErrorReporter.reportError("Invalid Option \"" + cmd + "\".");
