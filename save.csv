@@ -1,8 +1,8 @@
 NullPipe0,NullPipe0,NullPipe0,NullPipe0,NullPipe0,NullPipe0,NullPipe0,NullPipe0
 NullPipe0,NullPipe0,NullPipe0,NullPipe0,NullPipe0,NullPipe0,NullPipe0,NullPipe0
-NullPipe0,Source1,Pipe1,Pipe1,CornerPipe2,NullPipe0,NullPipe0,NullPipe0
-NullPipe0,NullPipe0,NullPipe0,NullPipe0,Pipe0,NullPipe0,NullPipe0,NullPipe0
-NullPipe0,NullPipe0,NullPipe0,NullPipe0,Pipe0,NullPipe0,NullPipe0,NullPipe0
-NullPipe0,NullPipe0,NullPipe0,NullPipe0,Pipe0,NullPipe0,NullPipe0,NullPipe0
-NullPipe0,NullPipe0,NullPipe0,NullPipe0,Sink0,NullPipe0,NullPipe0,NullPipe0
+NullPipe0,NullPipe0,Source1,Junction0,Junction0,Junction0,Junction0,CornerPipe2
+NullPipe0,Source2,NullPipe0,Pipe0,Pipe0,Pipe0,Pipe0,Pipe0
+NullPipe0,Pipe1,Pipe1,Pipe0,Pipe0,Pipe0,Pipe0,Pipe0
+NullPipe0,NullPipe0,NullPipe0,Pipe0,Pipe0,Pipe0,Pipe0,Pipe0
+NullPipe0,NullPipe0,Sink1,CornerPipe3,Sink0,Sink0,Sink0,Sink0
 NullPipe0,NullPipe0,NullPipe0,NullPipe0,NullPipe0,NullPipe0,NullPipe0,NullPipe0

@@ -132,6 +132,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
         JMenuItem save = new JMenuItem("Save");
         save.addActionListener(this);
         file.add(save);
+        //TODO: Add functionality for New option.
         JMenuItem newNetw = new JMenuItem("New");
         newNetw.addActionListener(this);
         file.add(newNetw);
@@ -183,11 +184,10 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
                     System.exit(0);
                     break;
                 case "Save":
-                    ErrorReporter.reportError("Saving isn't currently implemented.");
+                    saveNetwork();
                     break;
                 case "New":
-                    ErrorReporter.reportError("TODO: Wire up save/load system.");
-                    WWWindow l = new WWWindow();
+                    ErrorReporter.reportError("TODO: Make this clear the grid and save.");
                     break;
                 default:
                     ErrorReporter.reportError("Invalid Option \"" + cmd + "\".");
@@ -463,6 +463,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
             if(lineCount<2){System.out.println(saveLines[lineCount]);}
             lineCount++;
         }
+        fileRead.close();
         
         //At this point lineCount should be the same as networkY. If it isn't, something's gone wrong with the save file.
         if(lineCount != networkY){
@@ -495,7 +496,13 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
                 //Where i is the row number and j is the column:
                 //Well, we need to extract the rotation. This should be a single-character int at the end of the string.
                 String name = rowElements[j].substring(0,rowElements[j].length() - 1);
-                int rotCur = Integer.parseInt(String.valueOf(rowElements[j].charAt(rowElements[j].length()-1)));
+                int rotCur = 0;
+                try{
+                    rotCur = Integer.parseInt(String.valueOf(rowElements[j].charAt(rowElements[j].length()-1)));
+                }catch(NumberFormatException e){
+                    ErrorReporter.reportError("Invalid rotation in save file: " + String.valueOf(rowElements[j].charAt(rowElements[j].length()-1)));
+                    return false;
+                }
                 
                 if(!name.equals("NullPipe")){loadNetwork.addPipe(name, j, i, rotCur);}
                 
@@ -506,7 +513,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
         DebugClass.printNetwork(loadNetwork);
         this.currentNetwork = loadNetwork;
         
-        //TODO: make this return true once this method is made
+        
         return true;
     }
     
@@ -540,6 +547,51 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
      * Returns: boolean representing the success/failure of the saving process.
      */
     public boolean saveNetwork(){
+        //Saves in save.csv. What it has to do is serialize them; 
+        //This is something of a problem, as its sorted by column and then row.
+        //To solve this we do some weird for loop stuff.
+        try{
+            File saveFile = new File("save.csv");
+            if (saveFile.createNewFile()) {
+                System.out.println("File created: " + saveFile.getName());
+            } else {
+                System.out.println("File " + saveFile.getName() + " already exists.");
+                if(saveFile.delete()){
+                    saveFile = new File("save.csv");
+                } else {
+                    ErrorReporter.reportError("Save file could not be created or deleted.");
+                }
+            }
+            
+            FileWriter saveWriter = new FileWriter(saveFile);
+            
+            for(int y = 0; y<networkY; y++){
+                String lineBuffer = "";
+                for(int x = 0; x<networkX; x++){
+                    lineBuffer += currentNetwork.pipeGrid[x][y].getClass().getName();
+                    lineBuffer += currentNetwork.pipeGrid[x][y].rotation;
+                    lineBuffer += ",";
+                }
+                //lineBuffer will have an extraneous comma at the end we have to get rid of.
+                lineBuffer = lineBuffer.substring(0,lineBuffer.length() - 1);
+                //Need to seperate rows by a line seperator.
+                System.out.println(lineBuffer);
+                saveWriter.write(lineBuffer + "\n");
+                //todo make this write to file
+            }   
+            
+            saveWriter.flush();
+            saveWriter.close();
+        }catch(IOException e){
+            ErrorReporter.reportError("Error in file loading: " + e.toString());
+        }finally{
+            
+        }
+        
+        
+        
+        
+    
         return false;
     }
     
