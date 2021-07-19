@@ -462,7 +462,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
         int lineCount = 0;
         while(fileRead.hasNextLine() && lineCount < networkY){
             saveLines[lineCount] = fileRead.nextLine();
-            if(lineCount<2){System.out.println(saveLines[lineCount]);}
+            //if(lineCount<2){System.out.println(saveLines[lineCount]);}
             lineCount++;
         }
         fileRead.close();
@@ -512,7 +512,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
             }
             
         }
-        DebugClass.printNetwork(loadNetwork);
+        //DebugClass.printNetwork(loadNetwork);
         this.currentNetwork = loadNetwork;
         
         
@@ -577,7 +577,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
                 //lineBuffer will have an extraneous comma at the end we have to get rid of.
                 lineBuffer = lineBuffer.substring(0,lineBuffer.length() - 1);
                 //Need to seperate rows by a line seperator.
-                System.out.println(lineBuffer);
+                //System.out.println(lineBuffer);
                 saveWriter.write(lineBuffer + "\n");
                 //todo make this write to file
             }   

@@ -165,7 +165,7 @@ public class PipeNetwork
                 break;
             case "NullPipe":
                 //if its trying to add a NullPipe, you probably just dont want to change anything.
-                System.out.println("Trying to add NullPipe at " + x + "," + y);
+                ErrorReporter.reportError("Trying to add NullPipe at " + x + "," + y);
                 break;
             default:
                 ErrorReporter.reportError("Invalid Pipe Type \"" + type + "\", Canon pipe types are \"Pipe\", \"Junction\", \"Source\", and \"Sink\"");
