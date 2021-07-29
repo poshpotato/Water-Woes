@@ -132,7 +132,8 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
         JMenuItem save = new JMenuItem("Save");
         save.addActionListener(this);
         file.add(save);
-        //TODO: Add functionality for New option.
+        
+        //Note: Savings hard!
         JMenuItem newNetw = new JMenuItem("New");
         newNetw.addActionListener(this);
         file.add(newNetw);
@@ -184,7 +185,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
                     System.exit(0);
                     break;
                 case "Save":
-                    ErrorReporter.reportError("testing out those dialogs");
+                    //ErrorReporter.reportError("testing out those dialogs");
                     saveNetwork();
                     break;
                 case "New":
@@ -557,7 +558,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
             if (saveFile.createNewFile()) {
                 System.out.println("File created: " + saveFile.getName());
             } else {
-                System.out.println("File " + saveFile.getName() + " already exists.");
+                //System.out.println("File " + saveFile.getName() + " already exists.");
                 if(saveFile.delete()){
                     saveFile = new File("save.csv");
                 } else {
