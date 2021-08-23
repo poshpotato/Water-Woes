@@ -132,7 +132,9 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
         JMenuItem save = new JMenuItem("Save");
         save.addActionListener(this);
         file.add(save);
-        //TODO: Add functionality for New option.
+        JMenuItem load = new JMenuItem("Load");
+        load.addActionListener(this);
+        file.add(load);
         JMenuItem newNetw = new JMenuItem("New");
         newNetw.addActionListener(this);
         file.add(newNetw);
@@ -184,8 +186,13 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
                     System.exit(0);
                     break;
                 case "Save":
-                    ErrorReporter.reportError("testing out those dialogs");
+                    //ErrorReporter.reportError("testing out those dialogs");
                     saveNetwork();
+                    break;
+                case "Load":
+                    loadNetworkFromFile();
+                    //After loading it has to recalculate.
+                    currentNetwork.determineFlowRates();
                     break;
                 case "New":
                     setUpNewNetwork();
@@ -550,14 +557,14 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
      */
     public boolean saveNetwork(){
         //Saves in save.csv. What it has to do is serialize them; 
-        //This is something of a problem, as its sorted by column and then row.
+        //This is something of a problem, as its sorted by column and then row as opposed to the PipeGrid array's row and then column.
         //To solve this we do some weird for loop stuff.
         try{
             File saveFile = new File("save.csv");
             if (saveFile.createNewFile()) {
-                System.out.println("File created: " + saveFile.getName());
+                ErrorReporter.reportError("File created: " + saveFile.getName());
             } else {
-                System.out.println("File " + saveFile.getName() + " already exists.");
+                //System.out.println("File " + saveFile.getName() + " already exists.");
                 if(saveFile.delete()){
                     saveFile = new File("save.csv");
                 } else {
