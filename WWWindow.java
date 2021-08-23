@@ -135,6 +135,7 @@ public class WWWindow extends JFrame implements ActionListener, MenuListener,Mou
         JMenuItem load = new JMenuItem("Load");
         load.addActionListener(this);
         file.add(load);
+        //Note: Savings hard!
         JMenuItem newNetw = new JMenuItem("New");
         newNetw.addActionListener(this);
         file.add(newNetw);
